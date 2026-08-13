@@ -1,0 +1,197 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Serif+Devanagari:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Varsa Color System */
+  --bg-cream: #F7F0E3;
+  --bg-soft-beige: #EDE1CF;
+  --bg-dark-brown: #3A2115;
+  --bg-charcoal: #241812;
+  --color-terracotta: #A8441A;
+  --color-terracotta-hover: #8C3714;
+  --color-heritage-gold: #C28A3D;
+  --color-gold-light: #E5C384;
+  --color-text-dark: #241812;
+  --color-text-muted: #6E5B50;
+  --color-text-light: #F7F0E3;
+  
+  /* Fonts */
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-marathi: 'Noto Serif Devanagari', 'Cormorant Garamond', serif;
+
+  /* Card Radius & Shadows */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-full: 9999px;
+
+  --shadow-subtle: 0 4px 20px rgba(58, 33, 21, 0.06);
+  --shadow-card: 0 10px 30px rgba(36, 24, 18, 0.12);
+  --shadow-hover: 0 20px 40px rgba(36, 24, 18, 0.18);
+
+  --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-sans);
+  background-color: var(--bg-cream);
+  color: var(--color-text-dark);
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-color: var(--bg-cream);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Base Typography */
+h1, h2, h3, h4, .font-serif {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--color-text-dark);
+}
+
+.marathi-text {
+  font-family: var(--font-marathi);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-cream);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-heritage-gold);
+  border-radius: 4px;
+}
+
+/* Utility Classes */
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Buttons */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--color-terracotta);
+  color: #FFFFFF;
+  padding: 12px 28px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: var(--transition-smooth);
+  box-shadow: 0 4px 14px rgba(168, 68, 26, 0.3);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-terracotta-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(168, 68, 26, 0.4);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: transparent;
+  color: var(--bg-dark-brown);
+  padding: 11px 24px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: 1.5px solid var(--bg-dark-brown);
+  cursor: pointer;
+  text-decoration: none;
+  transition: var(--transition-smooth);
+}
+
+.btn-outline:hover {
+  background-color: var(--bg-dark-brown);
+  color: var(--bg-cream);
+}
+
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--color-heritage-gold);
+  color: var(--bg-dark-brown);
+  padding: 12px 28px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 0.95rem;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: var(--transition-smooth);
+}
+
+.btn-gold:hover {
+  background-color: var(--color-gold-light);
+  transform: translateY(-2px);
+}
+
+/* Wavy Decorative Scalloped Border Divider */
+.wavy-border {
+  height: 24px;
+  width: 100%;
+  background-image: radial-gradient(circle at 12px -4px, transparent 14px, var(--bg-dark-brown) 15px);
+  background-size: 24px 24px;
+}
+
+.wavy-border-bottom {
+  height: 20px;
+  width: 100%;
+  background: radial-gradient(circle at 10px 18px, var(--bg-dark-brown) 10px, transparent 11px);
+  background-size: 20px 20px;
+  margin-top: -1px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+/* Card hover animation */
+.hover-card-lift {
+  transition: var(--transition-smooth);
+}
+.hover-card-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+}
+
+/* Responsive bottom padding for mobile sticky nav */
+@media (max-width: 768px) {
+  body {
+    padding-bottom: 72px;
+  }
+}
