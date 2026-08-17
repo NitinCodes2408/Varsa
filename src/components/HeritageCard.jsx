@@ -100,7 +100,7 @@ export default function HeritageCard({ item, variant = "popular" }) {
         )}
 
         <Link
-          to={`/heritage/${item.id}`}
+          to={item.id === 'bamboo-craft' ? '/crafts/bamboo' : `/heritage/${item.id}`}
           style={{
             marginTop: '8px',
             display: 'inline-flex',

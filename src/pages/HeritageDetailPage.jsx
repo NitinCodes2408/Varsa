@@ -111,9 +111,15 @@ export default function HeritageDetailPage() {
           </p>
 
           <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', alignItems: 'center' }}>
-            <a href="#story-section" className="btn-primary" style={{ padding: '12px 30px' }}>
-              Explore More
-            </a>
+            {item.id === 'bamboo-craft' ? (
+              <Link to="/crafts/bamboo" className="btn-primary" style={{ padding: '12px 30px', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+                🎋 Explore Bamboo by District (Gadchiroli & Chandrapur) →
+              </Link>
+            ) : (
+              <a href="#story-section" className="btn-primary" style={{ padding: '12px 30px' }}>
+                Explore More
+              </a>
+            )}
             <SaveButton heritageId={item.id} size="lg" variant="dark" />
           </div>
         </div>
