@@ -2,10 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import OrnamentalDivider from '../components/OrnamentalDivider';
 import HeritageCard from '../components/HeritageCard';
-import StoryCard from '../components/StoryCard';
 import ArtisanCard from '../components/ArtisanCard';
 import SectionHeading from '../components/SectionHeading';
-import { popularDiscoveries, stories, artisans } from '../data/varsaData';
+import { popularDiscoveries, artisans } from '../data/varsaData';
+import { DISTRICT_LIST } from '../data/districtData';
 import { ShoppingBag, MapPin, Users, BookOpen, Leaf, ArrowRight } from 'lucide-react';
 
 export default function HomePage() {
@@ -277,299 +277,154 @@ export default function HomePage() {
           />
 
           <div className="home-districts-grid">
-            {/* Gadchiroli District Card */}
-            <Link
-              to="/district/gadchiroli"
-              className="home-district-card"
-              style={{
-                position: 'relative',
-                borderRadius: 'var(--radius-xl)',
-                overflow: 'hidden',
-                boxShadow: 'var(--shadow-card)',
-                minHeight: '380px',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'flex-end',
-                textDecoration: 'none',
-                color: '#FFFFFF',
-                backgroundColor: 'var(--bg-dark-brown)',
-                border: '1.5px solid rgba(194, 138, 61, 0.3)',
-                transition: 'all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1)'
-              }}
-            >
-              {/* Background Photography */}
-              <div
-                className="district-bg-img"
-                style={{
-                  position: 'absolute',
-                  inset: 0,
-                  backgroundImage: `url('https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80')`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  transition: 'transform 0.5s ease',
-                  opacity: 0.82
-                }}
-              />
-
-              {/* Cinematic Warm Dark Overlay */}
-              <div
-                style={{
-                  position: 'absolute',
-                  inset: 0,
-                  background:
-                    'linear-gradient(180deg, rgba(36, 24, 18, 0.2) 0%, rgba(36, 24, 18, 0.6) 45%, rgba(24, 14, 9, 0.94) 100%)',
-                  zIndex: 1
-                }}
-              />
-
-              {/* Top District Badge */}
-              <div
-                style={{
-                  position: 'absolute',
-                  top: '20px',
-                  left: '20px',
-                  zIndex: 2
-                }}
-              >
-                <span
-                  style={{
-                    backgroundColor: 'rgba(168, 68, 26, 0.92)',
-                    color: '#FFFFFF',
-                    padding: '6px 14px',
-                    borderRadius: 'var(--radius-full)',
-                    fontSize: '0.78rem',
-                    fontWeight: '700',
-                    letterSpacing: '0.8px',
-                    textTransform: 'uppercase',
-                    backdropFilter: 'blur(6px)',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '6px'
-                  }}
-                >
-                  <MapPin size={13} /> Region Heritage
-                </span>
-              </div>
-
-              {/* Bottom Content Area */}
-              <div
+            {DISTRICT_LIST.map((dist) => (
+              <Link
+                key={dist.id}
+                to={`/district/${dist.id}`}
+                className="home-district-card"
                 style={{
                   position: 'relative',
-                  zIndex: 2,
-                  padding: '32px 28px',
+                  borderRadius: 'var(--radius-xl)',
+                  overflow: 'hidden',
+                  boxShadow: 'var(--shadow-card)',
+                  minHeight: '340px',
                   display: 'flex',
-                  alignItems: 'flex-end',
-                  justifyContent: 'space-between',
-                  gap: '16px'
+                  flexDirection: 'column',
+                  justifyContent: 'flex-end',
+                  textDecoration: 'none',
+                  color: '#FFFFFF',
+                  backgroundColor: 'var(--bg-dark-brown)',
+                  border: '1.5px solid rgba(194, 138, 61, 0.3)',
+                  transition: 'all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1)'
                 }}
               >
-                <div style={{ flex: 1 }}>
-                  <span
-                    className="marathi-text"
-                    style={{
-                      fontSize: '1rem',
-                      color: 'var(--color-heritage-gold)',
-                      fontWeight: '600',
-                      display: 'block',
-                      marginBottom: '4px'
-                    }}
-                  >
-                    गडचिरोली
-                  </span>
-                  <h3
-                    style={{
-                      fontFamily: 'var(--font-serif)',
-                      fontSize: 'clamp(1.9rem, 3.2vw, 2.5rem)',
-                      fontWeight: '600',
-                      color: '#FFFFFF',
-                      margin: '0 0 8px 0',
-                      lineHeight: 1.15
-                    }}
-                  >
-                    📍 Gadchiroli
-                  </h3>
-                  <p
-                    style={{
-                      fontSize: '1.02rem',
-                      color: 'rgba(247, 240, 227, 0.92)',
-                      lineHeight: 1.45,
-                      margin: 0,
-                      maxWidth: '440px'
-                    }}
-                  >
-                    Discover the hidden crafts, products and traditions of Gadchiroli.
-                  </p>
-                </div>
-
-                {/* Circular Arrow Button */}
+                {/* Background Photography */}
                 <div
-                  className="circular-arrow-btn"
+                  className="district-bg-img"
                   style={{
-                    width: '52px',
-                    height: '52px',
-                    borderRadius: '50%',
-                    backgroundColor: 'var(--color-terracotta)',
-                    color: '#FFFFFF',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    flexShrink: 0,
-                    boxShadow: '0 6px 18px rgba(168, 68, 26, 0.45)',
-                    transition: 'all 0.3s ease'
+                    position: 'absolute',
+                    inset: 0,
+                    backgroundImage: `url('${dist.image}')`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    transition: 'transform 0.5s ease',
+                    opacity: 0.82
                   }}
-                  aria-label="Explore Gadchiroli"
-                >
-                  <ArrowRight size={22} />
-                </div>
-              </div>
-            </Link>
+                />
 
-            {/* Chandrapur District Card */}
-            <Link
-              to="/district/chandrapur"
-              className="home-district-card"
-              style={{
-                position: 'relative',
-                borderRadius: 'var(--radius-xl)',
-                overflow: 'hidden',
-                boxShadow: 'var(--shadow-card)',
-                minHeight: '380px',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'flex-end',
-                textDecoration: 'none',
-                color: '#FFFFFF',
-                backgroundColor: 'var(--bg-dark-brown)',
-                border: '1.5px solid rgba(194, 138, 61, 0.3)',
-                transition: 'all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1)'
-              }}
-            >
-              {/* Background Photography */}
-              <div
-                className="district-bg-img"
-                style={{
-                  position: 'absolute',
-                  inset: 0,
-                  backgroundImage: `url('https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=1200&q=80')`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  transition: 'transform 0.5s ease',
-                  opacity: 0.82
-                }}
-              />
-
-              {/* Cinematic Warm Dark Overlay */}
-              <div
-                style={{
-                  position: 'absolute',
-                  inset: 0,
-                  background:
-                    'linear-gradient(180deg, rgba(36, 24, 18, 0.2) 0%, rgba(36, 24, 18, 0.6) 45%, rgba(24, 14, 9, 0.94) 100%)',
-                  zIndex: 1
-                }}
-              />
-
-              {/* Top District Badge */}
-              <div
-                style={{
-                  position: 'absolute',
-                  top: '20px',
-                  left: '20px',
-                  zIndex: 2
-                }}
-              >
-                <span
-                  style={{
-                    backgroundColor: 'rgba(168, 68, 26, 0.92)',
-                    color: '#FFFFFF',
-                    padding: '6px 14px',
-                    borderRadius: 'var(--radius-full)',
-                    fontSize: '0.78rem',
-                    fontWeight: '700',
-                    letterSpacing: '0.8px',
-                    textTransform: 'uppercase',
-                    backdropFilter: 'blur(6px)',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '6px'
-                  }}
-                >
-                  <MapPin size={13} /> Region Heritage
-                </span>
-              </div>
-
-              {/* Bottom Content Area */}
-              <div
-                style={{
-                  position: 'relative',
-                  zIndex: 2,
-                  padding: '32px 28px',
-                  display: 'flex',
-                  alignItems: 'flex-end',
-                  justifyContent: 'space-between',
-                  gap: '16px'
-                }}
-              >
-                <div style={{ flex: 1 }}>
-                  <span
-                    className="marathi-text"
-                    style={{
-                      fontSize: '1rem',
-                      color: 'var(--color-heritage-gold)',
-                      fontWeight: '600',
-                      display: 'block',
-                      marginBottom: '4px'
-                    }}
-                  >
-                    चंद्रपूर
-                  </span>
-                  <h3
-                    style={{
-                      fontFamily: 'var(--font-serif)',
-                      fontSize: 'clamp(1.9rem, 3.2vw, 2.5rem)',
-                      fontWeight: '600',
-                      color: '#FFFFFF',
-                      margin: '0 0 8px 0',
-                      lineHeight: 1.15
-                    }}
-                  >
-                    📍 Chandrapur
-                  </h3>
-                  <p
-                    style={{
-                      fontSize: '1.02rem',
-                      color: 'rgba(247, 240, 227, 0.92)',
-                      lineHeight: 1.45,
-                      margin: 0,
-                      maxWidth: '440px'
-                    }}
-                  >
-                    Explore authentic local products, crafts and cultural heritage of Chandrapur.
-                  </p>
-                </div>
-
-                {/* Circular Arrow Button */}
+                {/* Cinematic Warm Dark Overlay */}
                 <div
-                  className="circular-arrow-btn"
                   style={{
-                    width: '52px',
-                    height: '52px',
-                    borderRadius: '50%',
-                    backgroundColor: 'var(--color-terracotta)',
-                    color: '#FFFFFF',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    flexShrink: 0,
-                    boxShadow: '0 6px 18px rgba(168, 68, 26, 0.45)',
-                    transition: 'all 0.3s ease'
+                    position: 'absolute',
+                    inset: 0,
+                    background:
+                      'linear-gradient(180deg, rgba(36, 24, 18, 0.2) 0%, rgba(36, 24, 18, 0.6) 45%, rgba(24, 14, 9, 0.94) 100%)',
+                    zIndex: 1
                   }}
-                  aria-label="Explore Chandrapur"
+                />
+
+                {/* Top District Badge */}
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: '20px',
+                    left: '20px',
+                    zIndex: 2
+                  }}
                 >
-                  <ArrowRight size={22} />
+                  <span
+                    style={{
+                      backgroundColor: 'rgba(168, 68, 26, 0.92)',
+                      color: '#FFFFFF',
+                      padding: '6px 14px',
+                      borderRadius: 'var(--radius-full)',
+                      fontSize: '0.78rem',
+                      fontWeight: '700',
+                      letterSpacing: '0.8px',
+                      textTransform: 'uppercase',
+                      backdropFilter: 'blur(6px)',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '6px'
+                    }}
+                  >
+                    <MapPin size={13} /> Region Heritage
+                  </span>
                 </div>
-              </div>
-            </Link>
+
+                {/* Bottom Content Area */}
+                <div
+                  style={{
+                    position: 'relative',
+                    zIndex: 2,
+                    padding: '28px 24px',
+                    display: 'flex',
+                    alignItems: 'flex-end',
+                    justifyContent: 'space-between',
+                    gap: '16px'
+                  }}
+                >
+                  <div style={{ flex: 1 }}>
+                    <span
+                      className="marathi-text"
+                      style={{
+                        fontSize: '1rem',
+                        color: 'var(--color-heritage-gold)',
+                        fontWeight: '600',
+                        display: 'block',
+                        marginBottom: '4px'
+                      }}
+                    >
+                      {dist.marathiName}
+                    </span>
+                    <h3
+                      style={{
+                        fontFamily: 'var(--font-serif)',
+                        fontSize: 'clamp(1.7rem, 2.8vw, 2.2rem)',
+                        fontWeight: '600',
+                        color: '#FFFFFF',
+                        margin: '0 0 6px 0',
+                        lineHeight: 1.15
+                      }}
+                    >
+                      📍 {dist.name}
+                    </h3>
+                    <p
+                      style={{
+                        fontSize: '0.92rem',
+                        color: 'rgba(247, 240, 227, 0.92)',
+                        lineHeight: 1.45,
+                        margin: 0,
+                        maxWidth: '440px'
+                      }}
+                    >
+                      {dist.tagline}
+                    </p>
+                  </div>
+
+                  {/* Circular Arrow Button */}
+                  <div
+                    className="circular-arrow-btn"
+                    style={{
+                      width: '46px',
+                      height: '46px',
+                      borderRadius: '50%',
+                      backgroundColor: 'var(--color-terracotta)',
+                      color: '#FFFFFF',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      flexShrink: 0,
+                      boxShadow: '0 6px 18px rgba(168, 68, 26, 0.45)',
+                      transition: 'all 0.3s ease'
+                    }}
+                    aria-label={`Explore ${dist.name}`}
+                  >
+                    <ArrowRight size={20} />
+                  </div>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
 

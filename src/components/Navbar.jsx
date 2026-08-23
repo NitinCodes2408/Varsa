@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import MandalaLogo from './MandalaLogo';
-import { Menu, X, Compass, MapPin, Bookmark, Info, Sparkles } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 export default function Navbar() {
   const location = useLocation();
@@ -37,7 +37,33 @@ export default function Navbar() {
         <MandalaLogo />
 
         {/* Desktop Navigation Links */}
-        <nav className="desktop-only" style={{ display: 'flex', alignItems: 'center', gap: '32px' }}>
+        <nav className="desktop-only" style={{ display: 'flex', alignItems: 'center', gap: '28px' }}>
+          <Link
+            to="/"
+            style={{
+              textDecoration: 'none',
+              fontFamily: 'var(--font-sans)',
+              fontWeight: isActive('/') || isActive('/map') ? '700' : '600',
+              color: isActive('/') || isActive('/map') ? 'var(--color-terracotta)' : 'var(--bg-dark-brown)',
+              fontSize: '1rem',
+              transition: 'var(--transition-smooth)'
+            }}
+          >
+            🗺️ Maharashtra Map
+          </Link>
+          <Link
+            to="/home"
+            style={{
+              textDecoration: 'none',
+              fontFamily: 'var(--font-sans)',
+              fontWeight: isActive('/home') ? '700' : '600',
+              color: isActive('/home') ? 'var(--color-terracotta)' : 'var(--bg-dark-brown)',
+              fontSize: '1rem',
+              transition: 'var(--transition-smooth)'
+            }}
+          >
+            Overview
+          </Link>
           <Link
             to="/explore"
             style={{
@@ -63,19 +89,6 @@ export default function Navbar() {
             }}
           >
             Cultural Stories
-          </Link>
-          <Link
-            to="/map"
-            style={{
-              textDecoration: 'none',
-              fontFamily: 'var(--font-sans)',
-              fontWeight: isActive('/map') ? '700' : '600',
-              color: isActive('/map') ? 'var(--color-terracotta)' : 'var(--bg-dark-brown)',
-              fontSize: '1rem',
-              transition: 'var(--transition-smooth)'
-            }}
-          >
-            Heritage Map
           </Link>
           <Link
             to="/about"
@@ -138,7 +151,14 @@ export default function Navbar() {
             onClick={() => setMobileMenuOpen(false)}
             style={{ textDecoration: 'none', fontSize: '1.1rem', fontWeight: '600', color: 'var(--bg-dark-brown)' }}
           >
-            Home
+            🗺️ Maharashtra Map
+          </Link>
+          <Link
+            to="/home"
+            onClick={() => setMobileMenuOpen(false)}
+            style={{ textDecoration: 'none', fontSize: '1.1rem', fontWeight: '600', color: 'var(--bg-dark-brown)' }}
+          >
+            Overview / Home
           </Link>
           <Link
             to="/explore"
@@ -153,13 +173,6 @@ export default function Navbar() {
             style={{ textDecoration: 'none', fontSize: '1.1rem', fontWeight: '600', color: 'var(--bg-dark-brown)' }}
           >
             Cultural Stories
-          </Link>
-          <Link
-            to="/map"
-            onClick={() => setMobileMenuOpen(false)}
-            style={{ textDecoration: 'none', fontSize: '1.1rem', fontWeight: '600', color: 'var(--bg-dark-brown)' }}
-          >
-            Heritage Map
           </Link>
           <Link
             to="/saved"

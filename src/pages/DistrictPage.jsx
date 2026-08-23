@@ -1,41 +1,35 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link, useSearchParams, Navigate } from 'react-router-dom';
+import { useParams, Link, useSearchParams } from 'react-router-dom';
 import { districtData, DISTRICT_CATEGORIES, DISTRICT_LIST } from '../data/districtData';
-import OrnamentalDivider from '../components/OrnamentalDivider';
-import { MapPin, ArrowLeft, ArrowRight, Sparkles, CheckCircle2, Image as ImageIcon } from 'lucide-react';
+import { MapPin, ArrowRight, Image as ImageIcon } from 'lucide-react';
 
 export default function DistrictPage() {
   const { districtId } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
   
   const currentDistrictKey = districtId?.toLowerCase() || 'gadchiroli';
-  const district = districtData[currentDistrictKey];
-
-  // If district doesn't exist, fallback to gadchiroli
-  if (!district) {
-    return <Navigate to="/district/gadchiroli" replace />;
-  }
+  const district = districtData[currentDistrictKey] || districtData['gadchiroli'];
 
   // Get list of categories that actually have products in this district
   const availableCategories = DISTRICT_CATEGORIES.filter(
-    (cat) => district.categories[cat.id] && district.categories[cat.id].length > 0
+    (cat) => district?.categories?.[cat.id] && district.categories[cat.id].length > 0
   );
 
   const defaultCatId = availableCategories[0]?.id || 'bamboo-craft';
   const requestedCat = searchParams.get('category');
   
   const [activeCategory, setActiveCategory] = useState(
-    requestedCat && district.categories[requestedCat]?.length > 0 ? requestedCat : defaultCatId
+    requestedCat && district?.categories?.[requestedCat]?.length > 0 ? requestedCat : defaultCatId
   );
 
   useEffect(() => {
     const categoryParam = searchParams.get('category');
-    if (categoryParam && district.categories[categoryParam]?.length > 0) {
+    if (categoryParam && district?.categories?.[categoryParam]?.length > 0) {
       setActiveCategory(categoryParam);
-    } else if (!district.categories[activeCategory] || district.categories[activeCategory].length === 0) {
+    } else if (!district?.categories?.[activeCategory] || district.categories[activeCategory].length === 0) {
       setActiveCategory(defaultCatId);
     }
-  }, [searchParams, district, defaultCatId]);
+  }, [searchParams, district, defaultCatId, activeCategory]);
 
   const handleCategoryChange = (catId) => {
     setActiveCategory(catId);

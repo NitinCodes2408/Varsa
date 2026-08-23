@@ -12,11 +12,11 @@ export default function MobileNavbar() {
   };
 
   const navItems = [
-    { label: 'Home', path: '/', icon: Home },
+    { label: 'Map', path: '/', icon: MapPin },
+    { label: 'Overview', path: '/home', icon: Home },
     { label: 'Explore', path: '/explore', icon: Compass },
-    { label: 'Map', path: '/map', icon: MapPin },
     { label: 'Saved', path: '/saved', icon: Heart },
-    { label: 'Profile', path: '/about', icon: User }
+    { label: 'About', path: '/about', icon: User }
   ];
 
   return (
