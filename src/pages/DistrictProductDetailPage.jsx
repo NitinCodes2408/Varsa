@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { districtData, DISTRICT_CATEGORIES } from '../data/districtData';
-import { MapPin, ArrowLeft, CheckCircle2, Sparkles, Leaf } from 'lucide-react';
+import { MapPin, ArrowLeft, CheckCircle2, Sparkles } from 'lucide-react';
 
 export default function DistrictProductDetailPage() {
   const { districtId, categoryId, productId } = useParams();
@@ -189,6 +189,26 @@ export default function DistrictProductDetailPage() {
               >
                 <MapPin size={14} /> 📍 {district.name} District
               </div>
+
+              {/* Verified Image Source Credit Badge */}
+              {foundProduct.imageSource && foundProduct.image && (
+                <div
+                  style={{
+                    position: 'absolute',
+                    bottom: '16px',
+                    left: '20px',
+                    backgroundColor: 'rgba(24, 14, 9, 0.8)',
+                    color: '#F7F0E3',
+                    border: '1px solid rgba(194, 138, 61, 0.3)',
+                    padding: '4px 10px',
+                    borderRadius: 'var(--radius-sm)',
+                    fontSize: '0.74rem',
+                    backdropFilter: 'blur(6px)'
+                  }}
+                >
+                  📷 Source: {foundProduct.imageSource}
+                </div>
+              )}
             </div>
 
             {/* Product Information Column */}
@@ -438,17 +458,38 @@ export default function DistrictProductDetailPage() {
                   }}
                   className="related-craft-item"
                 >
-                  <img
-                    src={p.image}
-                    alt={p.name}
+                  {p.image ? (
+                    <img
+                      src={p.image}
+                      alt={p.name}
+                      style={{
+                        width: '72px',
+                        height: '72px',
+                        borderRadius: 'var(--radius-sm)',
+                        objectFit: 'cover',
+                        flexShrink: 0
+                      }}
+                      onError={(e) => {
+                        e.target.style.display = 'none';
+                        if (e.target.nextSibling) e.target.nextSibling.style.display = 'flex';
+                      }}
+                    />
+                  ) : null}
+                  <div
                     style={{
+                      display: p.image ? 'none' : 'flex',
                       width: '72px',
                       height: '72px',
                       borderRadius: 'var(--radius-sm)',
-                      objectFit: 'cover',
+                      backgroundColor: '#3A2115',
+                      color: 'var(--color-heritage-gold)',
+                      alignItems: 'center',
+                      justifyContent: 'center',
                       flexShrink: 0
                     }}
-                  />
+                  >
+                    <Sparkles size={20} />
+                  </div>
                   <div>
                     <h4
                       style={{

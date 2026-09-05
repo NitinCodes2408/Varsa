@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useSearchParams } from 'react-router-dom';
 import { districtData, DISTRICT_CATEGORIES, DISTRICT_LIST } from '../data/districtData';
-import { MapPin, ArrowRight, Image as ImageIcon } from 'lucide-react';
+import { MapPin, ArrowRight, Image as ImageIcon, CheckCircle2 } from 'lucide-react';
 
 export default function DistrictPage() {
   const { districtId } = useParams();
@@ -10,23 +10,23 @@ export default function DistrictPage() {
   const currentDistrictKey = districtId?.toLowerCase() || 'gadchiroli';
   const district = districtData[currentDistrictKey] || districtData['gadchiroli'];
 
-  // Get list of categories that actually have products in this district
+  // List of categories configured for this district
   const availableCategories = DISTRICT_CATEGORIES.filter(
-    (cat) => district?.categories?.[cat.id] && district.categories[cat.id].length > 0
+    (cat) => district?.categories?.[cat.id] !== undefined
   );
 
   const defaultCatId = availableCategories[0]?.id || 'bamboo-craft';
   const requestedCat = searchParams.get('category');
   
   const [activeCategory, setActiveCategory] = useState(
-    requestedCat && district?.categories?.[requestedCat]?.length > 0 ? requestedCat : defaultCatId
+    requestedCat && district?.categories?.[requestedCat] !== undefined ? requestedCat : defaultCatId
   );
 
   useEffect(() => {
     const categoryParam = searchParams.get('category');
-    if (categoryParam && district?.categories?.[categoryParam]?.length > 0) {
+    if (categoryParam && district?.categories?.[categoryParam] !== undefined) {
       setActiveCategory(categoryParam);
-    } else if (!district?.categories?.[activeCategory] || district.categories[activeCategory].length === 0) {
+    } else if (!district?.categories?.[activeCategory]) {
       setActiveCategory(defaultCatId);
     }
   }, [searchParams, district, defaultCatId, activeCategory]);
@@ -37,7 +37,7 @@ export default function DistrictPage() {
   };
 
   const currentCategoryMeta = DISTRICT_CATEGORIES.find((c) => c.id === activeCategory) || availableCategories[0];
-  const products = district.categories[activeCategory] || [];
+  const products = district.categories?.[activeCategory] || [];
 
   return (
     <div style={{ paddingBottom: '80px' }}>
@@ -137,6 +137,7 @@ export default function DistrictPage() {
 
         {/* Hero Banner for the Selected District */}
         <div
+          className="district-hero-banner"
           style={{
             position: 'relative',
             backgroundColor: '#3A2115',
@@ -149,16 +150,18 @@ export default function DistrictPage() {
           }}
         >
           {/* Background Image */}
-          <div
-            style={{
-              position: 'absolute',
-              inset: 0,
-              backgroundImage: `url('${district.heroImage}')`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              opacity: 0.42
-            }}
-          />
+          {district.heroImage && (
+            <div
+              style={{
+                position: 'absolute',
+                inset: 0,
+                backgroundImage: `url('${district.heroImage}')`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                opacity: 0.42
+              }}
+            />
+          )}
 
           {/* Gradient Overlay */}
           <div
@@ -247,362 +250,607 @@ export default function DistrictPage() {
           </div>
         </div>
 
-        {/* Category Header */}
-        <div style={{ marginBottom: '20px' }}>
-          <span
-            style={{
-              fontSize: '0.8rem',
-              fontWeight: '700',
-              textTransform: 'uppercase',
-              letterSpacing: '0.8px',
-              color: 'var(--color-terracotta)',
-              display: 'block',
-              marginBottom: '4px'
-            }}
-          >
-            Explore {district.name} By Category
-          </span>
-          <h2
-            style={{
-              fontFamily: 'var(--font-serif)',
-              fontSize: '1.8rem',
-              color: 'var(--bg-dark-brown)',
-              fontWeight: '600',
-              margin: 0
-            }}
-          >
-            Select a Heritage Category
-          </h2>
-        </div>
-
-        {/* Category Pills Navigation */}
-        <div
-          style={{
-            display: 'flex',
-            gap: '10px',
-            overflowX: 'auto',
-            paddingBottom: '12px',
-            marginBottom: '36px'
-          }}
-          className="no-scrollbar"
-        >
-          {availableCategories.map((cat) => {
-            const isActive = activeCategory === cat.id;
-            const count = district.categories[cat.id]?.length || 0;
-            return (
-              <button
-                key={cat.id}
-                onClick={() => handleCategoryChange(cat.id)}
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  padding: '10px 20px',
-                  borderRadius: 'var(--radius-full)',
-                  border: isActive
-                    ? '1.5px solid var(--color-terracotta)'
-                    : '1.5px solid rgba(194, 138, 61, 0.3)',
-                  backgroundColor: isActive ? 'var(--color-terracotta)' : '#EDE1CF',
-                  color: isActive ? '#FFFFFF' : 'var(--bg-dark-brown)',
-                  fontFamily: 'var(--font-sans)',
-                  fontSize: '0.94rem',
-                  fontWeight: '600',
-                  cursor: 'pointer',
-                  whiteSpace: 'nowrap',
-                  boxShadow: isActive ? '0 4px 14px rgba(168, 68, 26, 0.3)' : 'none',
-                  transition: 'var(--transition-smooth)'
-                }}
-              >
-                <span>{cat.icon}</span>
-                <span>{cat.name}</span>
-                <span
-                  style={{
-                    backgroundColor: isActive ? 'rgba(255, 255, 255, 0.25)' : 'rgba(194, 138, 61, 0.2)',
-                    color: isActive ? '#FFFFFF' : 'var(--color-text-muted)',
-                    fontSize: '0.75rem',
-                    padding: '2px 8px',
-                    borderRadius: 'var(--radius-full)',
-                    fontWeight: '700'
-                  }}
-                >
-                  {count}
-                </span>
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Category Header Label */}
-        {currentCategoryMeta && (
+        {/* Category & Products Section OR Coming Soon State */}
+        {availableCategories.length === 0 ? (
           <div
             style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              borderBottom: '1px solid rgba(194, 138, 61, 0.25)',
-              paddingBottom: '12px',
-              marginBottom: '32px'
+              textAlign: 'center',
+              padding: '64px 24px',
+              backgroundColor: '#EDE1CF',
+              borderRadius: 'var(--radius-xl)',
+              border: '1.5px solid rgba(194, 138, 61, 0.3)',
+              margin: '36px 0 20px 0',
+              boxShadow: 'var(--shadow-subtle)'
             }}
           >
-            <div>
-              <h3
+            <span style={{ fontSize: '2.8rem', display: 'block', marginBottom: '16px' }}>🏛️</span>
+            <h3
+              style={{
+                fontFamily: 'var(--font-serif)',
+                fontSize: '1.9rem',
+                color: 'var(--bg-dark-brown)',
+                fontWeight: '600',
+                marginBottom: '10px'
+              }}
+            >
+              Heritage collection coming soon
+            </h3>
+            <p
+              style={{
+                color: 'var(--color-text-muted)',
+                maxWidth: '520px',
+                margin: '0 auto 26px auto',
+                lineHeight: 1.65,
+                fontSize: '1rem'
+              }}
+            >
+              Archival research and verified artisan documentation for <strong>{district.name}</strong> are currently underway. Verified authentic products, traditional clusters, and artisan lineages will be cataloged soon.
+            </p>
+            <Link
+              to="/"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                backgroundColor: 'var(--color-terracotta)',
+                color: '#FFFFFF',
+                padding: '12px 26px',
+                borderRadius: 'var(--radius-full)',
+                textDecoration: 'none',
+                fontWeight: '600',
+                fontSize: '0.94rem',
+                boxShadow: '0 4px 14px rgba(168, 68, 26, 0.3)',
+                transition: 'var(--transition-smooth)'
+              }}
+            >
+              ← Return to Maharashtra Map
+            </Link>
+          </div>
+        ) : (
+          <>
+            {/* Category Header */}
+            <div style={{ marginBottom: '20px' }}>
+              <span
+                style={{
+                  fontSize: '0.8rem',
+                  fontWeight: '700',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.8px',
+                  color: 'var(--color-terracotta)',
+                  display: 'block',
+                  marginBottom: '4px'
+                }}
+              >
+                Explore {district.name} By Category
+              </span>
+              <h2
                 style={{
                   fontFamily: 'var(--font-serif)',
-                  fontSize: '1.6rem',
+                  fontSize: '1.8rem',
                   color: 'var(--bg-dark-brown)',
                   fontWeight: '600',
                   margin: 0
                 }}
               >
-                {currentCategoryMeta.icon} {district.name} • {currentCategoryMeta.name}
-              </h3>
-              <span className="marathi-text" style={{ fontSize: '0.92rem', color: 'var(--color-heritage-gold)' }}>
-                {currentCategoryMeta.marathi}
-              </span>
+                Select a Heritage Category
+              </h2>
             </div>
-            <span style={{ fontSize: '0.88rem', color: 'var(--color-text-muted)', fontWeight: '500' }}>
-              Showing {products.length} verified products
-            </span>
-          </div>
-        )}
 
-        {/* Clean 3-Column Desktop / 1-2 Column Mobile Grid of Product Cards */}
-        {products.length > 0 ? (
-          <div className="district-products-grid">
-            {products.map((product) => (
-              <article
-                key={product.id}
-                className="district-product-card"
+            {/* Category Pills Navigation */}
+            <div
+              style={{
+                display: 'flex',
+                gap: '10px',
+                overflowX: 'auto',
+                paddingBottom: '12px',
+                marginBottom: '32px'
+              }}
+              className="no-scrollbar"
+            >
+              {availableCategories.map((cat) => {
+                const isActive = activeCategory === cat.id;
+                const count = district.categories[cat.id]?.length || 0;
+                return (
+                  <button
+                    key={cat.id}
+                    onClick={() => handleCategoryChange(cat.id)}
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '8px',
+                      padding: '10px 20px',
+                      borderRadius: 'var(--radius-full)',
+                      border: isActive
+                        ? '1.5px solid var(--color-terracotta)'
+                        : '1.5px solid rgba(194, 138, 61, 0.3)',
+                      backgroundColor: isActive ? 'var(--color-terracotta)' : '#EDE1CF',
+                      color: isActive ? '#FFFFFF' : 'var(--bg-dark-brown)',
+                      fontFamily: 'var(--font-sans)',
+                      fontSize: '0.94rem',
+                      fontWeight: '600',
+                      cursor: 'pointer',
+                      whiteSpace: 'nowrap',
+                      boxShadow: isActive ? '0 4px 14px rgba(168, 68, 26, 0.3)' : 'none',
+                      transition: 'var(--transition-smooth)'
+                    }}
+                  >
+                    <span>{cat.icon}</span>
+                    <span>{cat.name}</span>
+                    <span
+                      style={{
+                        backgroundColor: isActive ? 'rgba(255, 255, 255, 0.25)' : 'rgba(194, 138, 61, 0.2)',
+                        color: isActive ? '#FFFFFF' : 'var(--color-text-muted)',
+                        fontSize: '0.75rem',
+                        padding: '2px 8px',
+                        borderRadius: 'var(--radius-full)',
+                        fontWeight: '700'
+                      }}
+                    >
+                      {count}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Dedicated Gadchiroli Bamboo Craft Heritage Section */}
+            {district.id === 'gadchiroli' && activeCategory === 'bamboo-craft' && (
+              <div
                 style={{
                   backgroundColor: '#EDE1CF',
-                  borderRadius: 'var(--radius-lg)',
-                  overflow: 'hidden',
-                  border: '1px solid rgba(194, 138, 61, 0.28)',
-                  boxShadow: 'var(--shadow-subtle)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  transition: 'all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)'
+                  borderRadius: 'var(--radius-xl)',
+                  border: '1.5px solid rgba(194, 138, 61, 0.35)',
+                  padding: '30px 28px',
+                  marginBottom: '36px',
+                  boxShadow: 'var(--shadow-subtle)'
                 }}
               >
-                {/* Real Product Image with Error Fallback */}
-                <Link
-                  to={`/district/${district.id}/${product.categoryId}/${product.id}`}
-                  style={{ display: 'block', overflow: 'hidden', height: '240px', position: 'relative', backgroundColor: 'var(--bg-dark-brown)' }}
-                >
-                  {product.image ? (
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className="product-card-img"
-                      style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                        display: 'block',
-                        transition: 'transform 0.45s ease'
-                      }}
-                      loading="lazy"
-                      onError={(e) => {
-                        e.target.style.display = 'none';
-                        e.target.nextSibling.style.display = 'flex';
-                      }}
-                    />
-                  ) : null}
-
-                  {/* Fallback "Image coming soon" */}
-                  <div
+                {/* Heritage Introduction Quote */}
+                <div style={{ marginBottom: '22px' }}>
+                  <span
                     style={{
-                      display: product.image ? 'none' : 'flex',
-                      position: 'absolute',
-                      inset: 0,
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      flexDirection: 'column',
-                      gap: '8px',
-                      backgroundColor: '#3A2115',
-                      color: 'var(--color-heritage-gold)',
-                      padding: '20px',
-                      textAlign: 'center'
+                      fontSize: '0.76rem',
+                      fontWeight: '700',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.8px',
+                      color: 'var(--color-terracotta)',
+                      display: 'block',
+                      marginBottom: '8px'
                     }}
                   >
-                    <ImageIcon size={28} />
-                    <span style={{ fontSize: '0.85rem', fontWeight: '600' }}>
-                      Authentic Photograph Coming Soon
-                    </span>
-                  </div>
-
-                  <div
-                    style={{
-                      position: 'absolute',
-                      top: '12px',
-                      left: '12px',
-                      backgroundColor: 'rgba(36, 24, 18, 0.88)',
-                      color: 'var(--color-heritage-gold)',
-                      fontSize: '0.74rem',
-                      fontWeight: '600',
-                      padding: '4px 10px',
-                      borderRadius: 'var(--radius-sm)',
-                      backdropFilter: 'blur(4px)'
-                    }}
-                  >
-                    📍 {product.district}
-                  </div>
-                </Link>
-
-                {/* Card Content */}
-                <div
-                  style={{
-                    padding: '22px 20px',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    flex: 1
-                  }}
-                >
-                  {/* Product Name */}
-                  <h4
+                    🎋 Gadchiroli Bamboo Craft Heritage
+                  </span>
+                  <p
                     style={{
                       fontFamily: 'var(--font-serif)',
-                      fontSize: '1.38rem',
-                      fontWeight: '600',
+                      fontSize: '1.14rem',
                       color: 'var(--bg-dark-brown)',
-                      margin: '0 0 6px 0',
-                      lineHeight: 1.25
+                      lineHeight: 1.65,
+                      margin: 0,
+                      fontWeight: '500'
                     }}
                   >
-                    <Link
-                      to={`/district/${district.id}/${product.categoryId}/${product.id}`}
-                      style={{ color: 'inherit', textDecoration: 'none' }}
-                    >
-                      {product.name}
-                    </Link>
-                  </h4>
+                    “Bamboo has long been an important material in the lives and livelihoods of communities in the Gadchiroli region. Traditional artisans have used bamboo to create everyday utility products as well as furniture and other crafted objects.”
+                  </p>
+                </div>
 
-                  {/* Production Village / Location */}
+                {/* Heritage Story: Why Bamboo Matters in Gadchiroli */}
+                <div
+                  style={{
+                    borderTop: '1px solid rgba(194, 138, 61, 0.25)',
+                    paddingTop: '20px',
+                    marginBottom: '22px'
+                  }}
+                >
+                  <h3
+                    style={{
+                      fontFamily: 'var(--font-serif)',
+                      fontSize: '1.35rem',
+                      color: 'var(--color-terracotta)',
+                      margin: '0 0 10px 0',
+                      fontWeight: '600'
+                    }}
+                  >
+                    Why Bamboo Matters in Gadchiroli
+                  </h3>
+                  <p
+                    style={{
+                      fontSize: '0.96rem',
+                      color: 'var(--bg-dark-brown)',
+                      lineHeight: 1.65,
+                      margin: 0
+                    }}
+                  >
+                    Bamboo is a locally important forest resource across Gadchiroli's vast deciduous woodlands. For generations, traditional bamboo artisans have developed deep working knowledge of selecting, seasoning, splitting, and hand-weaving native bamboo into durable household utility products, agricultural tools, and handcrafted furniture that embody sustainable living.
+                  </p>
+                </div>
+
+                {/* How It Is Made: Step-by-Step Visual Process */}
+                <div
+                  style={{
+                    borderTop: '1px solid rgba(194, 138, 61, 0.25)',
+                    paddingTop: '20px'
+                  }}
+                >
+                  <span
+                    style={{
+                      fontSize: '0.76rem',
+                      fontWeight: '700',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.8px',
+                      color: 'var(--bg-dark-brown)',
+                      display: 'block',
+                      marginBottom: '12px'
+                    }}
+                  >
+                    Traditional Craft Process
+                  </span>
+
                   <div
                     style={{
                       display: 'flex',
                       alignItems: 'center',
-                      gap: '6px',
+                      flexWrap: 'wrap',
+                      gap: '8px 10px',
                       fontSize: '0.88rem',
-                      color: 'var(--color-terracotta)',
-                      fontWeight: '600',
-                      marginBottom: '14px'
+                      fontWeight: '600'
                     }}
                   >
-                    <MapPin size={15} style={{ flexShrink: 0 }} />
-                    <span>Production Location: {product.village}</span>
-                  </div>
-
-                  {/* About Section */}
-                  <div style={{ marginBottom: '16px' }}>
-                    <span
-                      style={{
-                        fontSize: '0.78rem',
-                        fontWeight: '700',
-                        textTransform: 'uppercase',
-                        letterSpacing: '0.6px',
-                        color: 'var(--bg-dark-brown)',
-                        display: 'block',
-                        marginBottom: '4px'
-                      }}
-                    >
-                      About:
+                    <span style={{ backgroundColor: 'rgba(58, 33, 21, 0.08)', color: 'var(--bg-dark-brown)', padding: '6px 14px', borderRadius: 'var(--radius-sm)', border: '1px solid rgba(194, 138, 61, 0.3)' }}>
+                      Raw Bamboo
                     </span>
-                    <p
-                      style={{
-                        fontSize: '0.9rem',
-                        color: 'var(--color-text-muted)',
-                        lineHeight: 1.55,
-                        margin: 0
-                      }}
-                    >
-                      {product.about}
-                    </p>
-                  </div>
-
-                  {/* Uses Section */}
-                  <div style={{ marginBottom: '20px', marginTop: 'auto' }}>
-                    <span
-                      style={{
-                        fontSize: '0.78rem',
-                        fontWeight: '700',
-                        textTransform: 'uppercase',
-                        letterSpacing: '0.6px',
-                        color: 'var(--bg-dark-brown)',
-                        display: 'block',
-                        marginBottom: '6px'
-                      }}
-                    >
-                      Uses:
+                    <span style={{ color: 'var(--color-terracotta)', fontWeight: 'bold' }}>→</span>
+                    <span style={{ backgroundColor: 'rgba(58, 33, 21, 0.08)', color: 'var(--bg-dark-brown)', padding: '6px 14px', borderRadius: 'var(--radius-sm)', border: '1px solid rgba(194, 138, 61, 0.3)' }}>
+                      Cutting & Preparation
                     </span>
-                    <ul
-                      style={{
-                        listStyle: 'none',
-                        padding: 0,
-                        margin: 0,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        gap: '4px'
-                      }}
+                    <span style={{ color: 'var(--color-terracotta)', fontWeight: 'bold' }}>→</span>
+                    <span style={{ backgroundColor: 'rgba(58, 33, 21, 0.08)', color: 'var(--bg-dark-brown)', padding: '6px 14px', borderRadius: 'var(--radius-sm)', border: '1px solid rgba(194, 138, 61, 0.3)' }}>
+                      Splitting / Shaping
+                    </span>
+                    <span style={{ color: 'var(--color-terracotta)', fontWeight: 'bold' }}>→</span>
+                    <span style={{ backgroundColor: 'rgba(58, 33, 21, 0.08)', color: 'var(--bg-dark-brown)', padding: '6px 14px', borderRadius: 'var(--radius-sm)', border: '1px solid rgba(194, 138, 61, 0.3)' }}>
+                      Weaving / Assembly
+                    </span>
+                    <span style={{ color: 'var(--color-terracotta)', fontWeight: 'bold' }}>→</span>
+                    <span style={{ backgroundColor: 'rgba(58, 33, 21, 0.08)', color: 'var(--bg-dark-brown)', padding: '6px 14px', borderRadius: 'var(--radius-sm)', border: '1px solid rgba(194, 138, 61, 0.3)' }}>
+                      Finishing
+                    </span>
+                    <span style={{ color: 'var(--color-terracotta)', fontWeight: 'bold' }}>→</span>
+                    <span style={{ backgroundColor: 'var(--color-terracotta)', color: '#FFFFFF', padding: '6px 14px', borderRadius: 'var(--radius-sm)', boxShadow: '0 2px 8px rgba(168, 68, 26, 0.3)' }}>
+                      Finished Product
+                    </span>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Category Header Label */}
+            {currentCategoryMeta && (
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  borderBottom: '1px solid rgba(194, 138, 61, 0.25)',
+                  paddingBottom: '12px',
+                  marginBottom: '32px'
+                }}
+              >
+                <div>
+                  <h3
+                    style={{
+                      fontFamily: 'var(--font-serif)',
+                      fontSize: '1.6rem',
+                      color: 'var(--bg-dark-brown)',
+                      fontWeight: '600',
+                      margin: 0
+                    }}
+                  >
+                    {currentCategoryMeta.icon} {district.name} • {currentCategoryMeta.name}
+                  </h3>
+                  <span className="marathi-text" style={{ fontSize: '0.92rem', color: 'var(--color-heritage-gold)' }}>
+                    {currentCategoryMeta.marathi}
+                  </span>
+                </div>
+                <span style={{ fontSize: '0.88rem', color: 'var(--color-text-muted)', fontWeight: '500' }}>
+                  Showing {products.length} documented products
+                </span>
+              </div>
+            )}
+
+            {/* Clean 3-Column Desktop / 1-2 Column Mobile Grid of Product Cards */}
+            {products.length > 0 ? (
+              <div className="district-products-grid">
+                {products.map((product) => (
+                  <article
+                    key={product.id}
+                    className="district-product-card"
+                    style={{
+                      backgroundColor: '#EDE1CF',
+                      borderRadius: 'var(--radius-lg)',
+                      overflow: 'hidden',
+                      border: '1px solid rgba(194, 138, 61, 0.28)',
+                      boxShadow: 'var(--shadow-subtle)',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      transition: 'all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)'
+                    }}
+                  >
+                    {/* Real Product Image with Error Fallback */}
+                    <Link
+                      to={`/district/${district.id}/${product.categoryId || activeCategory}/${product.id}`}
+                      style={{ display: 'block', overflow: 'hidden', height: '240px', position: 'relative', backgroundColor: 'var(--bg-dark-brown)' }}
                     >
-                      {product.uses.map((use, idx) => (
-                        <li
-                          key={idx}
+                      {product.image ? (
+                        <img
+                          src={product.image}
+                          alt={product.name}
+                          className="product-card-img"
                           style={{
-                            fontSize: '0.86rem',
-                            color: 'var(--color-text-muted)',
-                            display: 'flex',
-                            alignItems: 'flex-start',
-                            gap: '8px'
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover',
+                            display: 'block',
+                            transition: 'transform 0.45s ease'
+                          }}
+                          loading="lazy"
+                          onError={(e) => {
+                            e.target.style.display = 'none';
+                            e.target.nextSibling.style.display = 'flex';
+                          }}
+                        />
+                      ) : null}
+
+                      {/* Fallback "Authentic Photograph Coming Soon" */}
+                      <div
+                        style={{
+                          display: product.image ? 'none' : 'flex',
+                          position: 'absolute',
+                          inset: 0,
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          flexDirection: 'column',
+                          gap: '8px',
+                          backgroundColor: '#3A2115',
+                          color: 'var(--color-heritage-gold)',
+                          padding: '20px',
+                          textAlign: 'center'
+                        }}
+                      >
+                        <ImageIcon size={28} />
+                        <span style={{ fontSize: '0.85rem', fontWeight: '600' }}>
+                          Authentic Photograph Coming Soon
+                        </span>
+                      </div>
+
+                      {/* District / Location Badge */}
+                      <div
+                        style={{
+                          position: 'absolute',
+                          top: '12px',
+                          left: '12px',
+                          backgroundColor: 'rgba(36, 24, 18, 0.88)',
+                          color: 'var(--color-heritage-gold)',
+                          fontSize: '0.74rem',
+                          fontWeight: '600',
+                          padding: '4px 10px',
+                          borderRadius: 'var(--radius-sm)',
+                          backdropFilter: 'blur(4px)'
+                        }}
+                      >
+                        📍 {product.district || `${district.name}, Maharashtra`}
+                      </div>
+
+                      {/* Photo Attribution Badge */}
+                      {product.imageSource && product.image && (
+                        <div
+                          style={{
+                            position: 'absolute',
+                            bottom: '8px',
+                            left: '10px',
+                            backgroundColor: 'rgba(24, 14, 9, 0.82)',
+                            color: '#F7F0E3',
+                            fontSize: '0.66rem',
+                            padding: '2px 8px',
+                            borderRadius: 'var(--radius-sm)',
+                            backdropFilter: 'blur(4px)',
+                            border: '1px solid rgba(194, 138, 61, 0.25)',
+                            maxWidth: '90%',
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                            whiteSpace: 'nowrap'
                           }}
                         >
-                          <span style={{ color: 'var(--color-heritage-gold)', fontWeight: 'bold' }}>•</span>
-                          <span>{use}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                          📷 {product.imageSource}
+                        </div>
+                      )}
+                    </Link>
 
-                  {/* View Details Link */}
-                  <Link
-                    to={`/district/${district.id}/${product.categoryId}/${product.id}`}
-                    style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      gap: '8px',
-                      textDecoration: 'none',
-                      fontSize: '0.92rem',
-                      fontWeight: '600',
-                      color: '#FFFFFF',
-                      backgroundColor: 'var(--bg-dark-brown)',
-                      padding: '10px 18px',
-                      borderRadius: 'var(--radius-full)',
-                      transition: 'var(--transition-smooth)',
-                      marginTop: '8px'
-                    }}
-                    className="product-detail-btn"
-                  >
-                    View Product Details <ArrowRight size={15} />
-                  </Link>
-                </div>
-              </article>
-            ))}
-          </div>
-        ) : (
-          <div
-            style={{
-              textAlign: 'center',
-              padding: '60px 20px',
-              backgroundColor: '#EDE1CF',
-              borderRadius: 'var(--radius-lg)',
-              border: '1.5px dashed var(--color-heritage-gold)'
-            }}
-          >
-            <p style={{ color: 'var(--color-text-muted)', margin: 0 }}>
-              No products listed under this category yet.
-            </p>
-          </div>
+                    {/* Card Content */}
+                    <div
+                      style={{
+                        padding: '22px 20px',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        flex: 1
+                      }}
+                    >
+                      {/* ✓ वारसा Verified Badge */}
+                      {product.isVerified && (
+                        <div
+                          style={{
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '5px',
+                            backgroundColor: 'rgba(36, 24, 18, 0.92)',
+                            color: '#F7D488',
+                            fontSize: '0.74rem',
+                            fontWeight: '700',
+                            padding: '3px 9px',
+                            borderRadius: 'var(--radius-sm)',
+                            border: '1px solid rgba(194, 138, 61, 0.4)',
+                            marginBottom: '10px',
+                            width: 'fit-content'
+                          }}
+                        >
+                          <CheckCircle2 size={13} style={{ color: '#F7D488' }} />
+                          <span>वारसा Verified</span>
+                        </div>
+                      )}
+
+                      {/* Product Name */}
+                      <h4
+                        style={{
+                          fontFamily: 'var(--font-serif)',
+                          fontSize: '1.34rem',
+                          fontWeight: '600',
+                          color: 'var(--bg-dark-brown)',
+                          margin: '0 0 6px 0',
+                          lineHeight: 1.25
+                        }}
+                      >
+                        <Link
+                          to={`/district/${district.id}/${product.categoryId || activeCategory}/${product.id}`}
+                          style={{ color: 'inherit', textDecoration: 'none' }}
+                        >
+                          {product.name}
+                        </Link>
+                      </h4>
+
+                      {/* Location Note */}
+                      <div
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '6px',
+                          fontSize: '0.86rem',
+                          color: 'var(--color-terracotta)',
+                          fontWeight: '600',
+                          marginBottom: '14px'
+                        }}
+                      >
+                        <MapPin size={14} style={{ flexShrink: 0 }} />
+                        <span>{product.village || `${district.name}, Maharashtra`}</span>
+                      </div>
+
+                      {/* About Section */}
+                      <div style={{ marginBottom: '16px' }}>
+                        <span
+                          style={{
+                            fontSize: '0.78rem',
+                            fontWeight: '700',
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.6px',
+                            color: 'var(--bg-dark-brown)',
+                            display: 'block',
+                            marginBottom: '4px'
+                          }}
+                        >
+                          About:
+                        </span>
+                        <p
+                          style={{
+                            fontSize: '0.9rem',
+                            color: 'var(--color-text-muted)',
+                            lineHeight: 1.55,
+                            margin: 0
+                          }}
+                        >
+                          {product.about}
+                        </p>
+                      </div>
+
+                      {/* Uses Section */}
+                      {product.uses && product.uses.length > 0 && (
+                        <div style={{ marginBottom: '20px', marginTop: 'auto' }}>
+                          <span
+                            style={{
+                              fontSize: '0.78rem',
+                              fontWeight: '700',
+                              textTransform: 'uppercase',
+                              letterSpacing: '0.6px',
+                              color: 'var(--bg-dark-brown)',
+                              display: 'block',
+                              marginBottom: '6px'
+                            }}
+                          >
+                            Traditional & Practical Uses:
+                          </span>
+                          <ul
+                            style={{
+                              listStyle: 'none',
+                              padding: 0,
+                              margin: 0,
+                              display: 'flex',
+                              flexDirection: 'column',
+                              gap: '4px'
+                            }}
+                          >
+                            {product.uses.map((use, idx) => (
+                              <li
+                                key={idx}
+                                style={{
+                                  fontSize: '0.86rem',
+                                  color: 'var(--color-text-muted)',
+                                  display: 'flex',
+                                  alignItems: 'flex-start',
+                                  gap: '8px'
+                                }}
+                              >
+                                <span style={{ color: 'var(--color-heritage-gold)', fontWeight: 'bold' }}>•</span>
+                                <span>{use}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      {/* View Story / Details Link */}
+                      <Link
+                        to={`/district/${district.id}/${product.categoryId || activeCategory}/${product.id}`}
+                        style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: '8px',
+                          textDecoration: 'none',
+                          fontSize: '0.92rem',
+                          fontWeight: '600',
+                          color: '#FFFFFF',
+                          backgroundColor: 'var(--bg-dark-brown)',
+                          padding: '10px 18px',
+                          borderRadius: 'var(--radius-full)',
+                          transition: 'var(--transition-smooth)',
+                          marginTop: '8px'
+                        }}
+                        className="product-detail-btn"
+                      >
+                        View Story <ArrowRight size={15} />
+                      </Link>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            ) : (
+              <div
+                style={{
+                  textAlign: 'center',
+                  padding: '60px 20px',
+                  backgroundColor: '#EDE1CF',
+                  borderRadius: 'var(--radius-lg)',
+                  border: '1.5px dashed var(--color-heritage-gold)'
+                }}
+              >
+                <span style={{ fontSize: '2.4rem', display: 'block', marginBottom: '12px' }}>🌿</span>
+                <h4 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.4rem', color: 'var(--bg-dark-brown)', margin: '0 0 8px 0' }}>
+                  Verified Documentation Coming Soon
+                </h4>
+                <p style={{ color: 'var(--color-text-muted)', margin: 0, maxWidth: '460px', marginInline: 'auto', lineHeight: 1.6 }}>
+                  Artisanal fieldwork and verified documentation for <strong>{currentCategoryMeta?.name || 'this category'}</strong> in {district.name} are currently underway.
+                </p>
+              </div>
+            )}
+          </>
         )}
       </div>
 

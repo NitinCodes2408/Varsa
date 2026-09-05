@@ -3,7 +3,27 @@
 
 export const MAHARASHTRA_MAP_VIEWBOX = "0 0 1000 780";
 
-export const HIGHLIGHTED_DISTRICT_IDS = ["gadchiroli", "chandrapur", "nagpur", "kolhapur", "solapur"];
+export const HIGHLIGHTED_DISTRICT_IDS = [
+  "gadchiroli",
+  "chandrapur",
+  "nagpur",
+  "kolhapur",
+  "solapur",
+  "nashik",
+  "sindhudurg",
+  "sangli",
+  "wardha",
+  "satara",
+  "palghar",
+  "chhatrapati-sambhajinagar",
+  "aurangabad",
+  "pune",
+  "raigad",
+  "dharashiv",
+  "osmanabad",
+  "bhandara",
+  "gondia"
+];
 
 export const HIGHLIGHTED_DISTRICTS_LIST = [
   {
@@ -22,7 +42,7 @@ export const HIGHLIGHTED_DISTRICTS_LIST = [
     id: "chandrapur",
     name: "Chandrapur",
     marathiName: "चंद्रपूर",
-    landmark: "Tadoba-Andhari Tiger Reserve",
+    landmark: "Local / Forest Products",
     landmarkIcon: "🐅",
     quote: "Explore authentic local products, crafts and cultural heritage of Chandrapur.",
     description: "Ancient artisan heritage featuring lost-wax Dhokra brass sculptures, bamboo flutes, and bold Saoji spices.",
@@ -34,7 +54,7 @@ export const HIGHLIGHTED_DISTRICTS_LIST = [
     id: "nagpur",
     name: "Nagpur",
     marathiName: "नागपूर",
-    landmark: "Nagpur Orange / Tarri Poha",
+    landmark: "Tarri Poha & Orange Products",
     landmarkIcon: "🍊",
     quote: "Discover authentic local products inspired by Nagpur’s famous orange heritage.",
     description: "The world-famous 'Orange City' celebrated for GI-tagged mandarin oranges, Santra burfi, Karvat Kati sarees, and Tarri Poha.",
@@ -61,10 +81,154 @@ export const HIGHLIGHTED_DISTRICTS_LIST = [
     landmark: "Solapuri Chaddar",
     landmarkIcon: "🧵",
     quote: "Discover the world-renowned GI-tagged handloom chaddars, terry towels and spicy peanut chutney of Solapur.",
-    description: "Legendary textile powerhouse famous for GI-tagged jacquard-woven Solapuri Chaddars, absorbent towels, and spicy shenga chutney.",
+    description: "Legendary textile powerhouse famous for GI-tagged jacquard-woven Solapuri Chaddars, absorbent towels, and spicy peanut chutney.",
     route: "/district/solapur",
     color: "#9A3412",
     keyProducts: ["GI Solapuri Chaddar", "Terry Towels", "Shenga Chutney"]
+  },
+  {
+    id: "nashik",
+    name: "Nashik",
+    marathiName: "नाशिक",
+    landmark: "Paithani",
+    landmarkIcon: "🥻",
+    quote: "GI-tagged Yeola Paithani silk sarees and Godavari agricultural heritage.",
+    description: "The epicenter of Maharashtra's 'Queen of Silks'—the GI-tagged Yeola Paithani saree with pure gold zari borders.",
+    route: "/district/nashik",
+    color: "#A8441A",
+    keyProducts: ["GI Yeola Paithani", "Gold Zari Weaves", "Valley Produce"]
+  },
+  {
+    id: "sindhudurg",
+    name: "Sindhudurg",
+    marathiName: "सिंधुदुर्ग",
+    landmark: "Sawantwadi Wooden Craft",
+    landmarkIcon: "🎨",
+    quote: "Royal Sawantwadi lacquerware wooden toys, Ganjifa card paintings and Konkan spices.",
+    description: "Celebrated for royal court crafts including GI-tagged lacquerware wooden toys, hand-painted round Ganjifa cards, and Konkan spices.",
+    route: "/district/sindhudurg",
+    color: "#C28A3D",
+    keyProducts: ["Sawantwadi Wooden Toys", "Ganjifa Art", "Konkan Spices"]
+  },
+  {
+    id: "sangli",
+    name: "Sangli",
+    marathiName: "सांगली",
+    landmark: "Miraj Sitar & Tanpura",
+    landmarkIcon: "🪕",
+    quote: "World-renowned GI-tagged Miraj handcrafted Sitars, Tanpuras and classical instruments.",
+    description: "Globally revered as the instrument-making heart of Indian classical music, hand-carved by master luthiers for over 175 years.",
+    route: "/district/sangli",
+    color: "#B45309",
+    keyProducts: ["GI Miraj Sitar", "Classical Tanpura", "Pandharpur Gourds"]
+  },
+  {
+    id: "wardha",
+    name: "Wardha",
+    marathiName: "वर्धा",
+    landmark: "Khadi & Cotton Heritage",
+    landmarkIcon: "🧶",
+    quote: "Authentic Sevagram handspun Khadi, organic cotton heritage and Gram Swaraj artisanal traditions.",
+    description: "The birthplace of Mahatma Gandhi's Sevagram Ashram and handspun Amber Charkha organic Khadi weaving.",
+    route: "/district/wardha",
+    color: "#9A3412",
+    keyProducts: ["Sevagram Khadi", "Amber Charkha Yarn", "Desi Organic Cotton"]
+  },
+  {
+    id: "satara",
+    name: "Satara",
+    marathiName: "सातारा",
+    landmark: "Mahabaleshwar Strawberry",
+    landmarkIcon: "🍓",
+    quote: "GI-tagged Mahabaleshwar strawberries, historic honey collection and Sahyadri hillside farming.",
+    description: "Perched in the mist-laden Sahyadri Western Ghats, accounting for over 85% of India's GI-tagged strawberry cultivation.",
+    route: "/district/satara",
+    color: "#D97706",
+    keyProducts: ["GI Mahabaleshwar Strawberry", "Sahyadri Honey", "Organic Preserves"]
+  },
+  {
+    id: "palghar",
+    name: "Palghar",
+    marathiName: "पालघर",
+    landmark: "Warli Art",
+    landmarkIcon: "🎨",
+    quote: "Ancient Warli tribal art, sacred rice-paste murals and coastal Sahyadri indigenous crafts.",
+    description: "The homeland of the indigenous Warli community, famed worldwide for traditional geometric rice-paste tribal paintings.",
+    route: "/district/palghar",
+    color: "#A8441A",
+    keyProducts: ["GI Warli Art", "Tribal Murals", "Bamboo Artifacts"]
+  },
+  {
+    id: "chhatrapati-sambhajinagar",
+    name: "Chhatrapati Sambhajinagar",
+    marathiName: "छत्रपती संभाजीनगर",
+    landmark: "Himroo",
+    landmarkIcon: "👑",
+    quote: "Royal Mughal & Nizam era GI-tagged Himroo weaving, Bidriware and Ajanta-Ellora cultural heritage.",
+    description: "Renowned for centuries-old GI-tagged Himroo silk-cotton brocade weaving with intricate floral and geometric motifs.",
+    route: "/district/chhatrapati-sambhajinagar",
+    color: "#C28A3D",
+    keyProducts: ["GI Himroo Shawls", "Himroo Fabrics", "Bidri Craft"]
+  },
+  {
+    id: "pune",
+    name: "Pune",
+    marathiName: "पुणे",
+    landmark: "Puneri Pagadi",
+    landmarkIcon: "👳",
+    quote: "Historic GI-tagged Puneri Pagadi turbans, Tambat Ali beaten copperware and Peshwa craft legacy.",
+    description: "The cultural capital of Maharashtra, home to the prestigious GI-tagged Puneri Pagadi headdress and beaten copperware.",
+    route: "/district/pune",
+    color: "#B45309",
+    keyProducts: ["GI Puneri Pagadi", "Tambat Copperware", "Heirloom Utensils"]
+  },
+  {
+    id: "raigad",
+    name: "Raigad",
+    marathiName: "रायगड",
+    landmark: "Pen Ganesh Idol",
+    landmarkIcon: "🗿",
+    quote: "Pen clay idol sculpting, GI-tagged Pen Ganpati idols, and Konkan coastal saltpan heritage.",
+    description: "Famed for the artisan town of Pen, producing iconic eco-friendly hand-sculpted Shadu clay Ganesh idols for over a century.",
+    route: "/district/raigad",
+    color: "#9A3412",
+    keyProducts: ["Pen Ganesh Idols", "Shadu Clay Statues", "Coastal Crafts"]
+  },
+  {
+    id: "dharashiv",
+    name: "Dharashiv",
+    marathiName: "धाराशिव",
+    landmark: "Tuljapur Kavdi Maal",
+    landmarkIcon: "📿",
+    quote: "Sacred Tuljapur Bhavani temple traditions, handcrafted Kavdi Maal and Marathwada folk crafts.",
+    description: "Spiritual heart of Marathwada centered around the sacred Tuljapur temple and its generational cowrie-shell craft.",
+    route: "/district/dharashiv",
+    color: "#D97706",
+    keyProducts: ["Tuljapur Kavdi Maal", "Temple Brass Bells", "Folk Artifacts"]
+  },
+  {
+    id: "bhandara",
+    name: "Bhandara",
+    marathiName: "भंडारा",
+    landmark: "Tasar Silk",
+    landmarkIcon: "🧵",
+    quote: "Traditional Tasar silk sericulture, Kosa tussar handloom weaving, and Brass city metallurgy.",
+    description: "Known as the 'Brass City' and a major hub for forest Tasar tussar silk cocoon harvesting and handloom weaving.",
+    route: "/district/bhandara",
+    color: "#A8441A",
+    keyProducts: ["Tasar Silk Sarees", "Tussar Fabric", "Brassware"]
+  },
+  {
+    id: "gondia",
+    name: "Gondia",
+    marathiName: "गोंदिया",
+    landmark: "Tasar Silk",
+    landmarkIcon: "🌾",
+    quote: "Pure Tasar forest silk cocoons, tribal kosa handloom, and Navegaon forest wetlands.",
+    description: "Abundant forest reserves supporting tribal Tasar silk sericulture and indigenous wild cocoon harvesting.",
+    route: "/district/gondia",
+    color: "#C28A3D",
+    keyProducts: ["Wild Tasar Cocoons", "Handspun Tussar Yarn", "Forest Crafts"]
   }
 ];
 

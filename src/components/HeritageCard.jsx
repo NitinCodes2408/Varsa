@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import SaveButton from './SaveButton';
+import { Camera } from 'lucide-react';
 
 export default function HeritageCard({ item, variant = "popular" }) {
   const isPopular = variant === "popular";
@@ -17,10 +18,45 @@ export default function HeritageCard({ item, variant = "popular" }) {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'flex-end',
-        background: `url(${item.image}) center/cover no-repeat`,
-        border: '1px solid rgba(194, 138, 61, 0.2)'
+        backgroundColor: '#2A1810',
+        border: '1px solid rgba(194, 138, 61, 0.25)'
       }}
     >
+      {/* Background Image (if available) */}
+      {item.image ? (
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            backgroundImage: `url(${item.image})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center'
+          }}
+        />
+      ) : (
+        /* Fallback placeholder for authentic archival */
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '8px',
+            backgroundColor: '#2E190E',
+            color: 'var(--color-heritage-gold)',
+            padding: '20px',
+            textAlign: 'center'
+          }}
+        >
+          <Camera size={32} opacity={0.6} />
+          <span style={{ fontSize: '0.85rem', fontWeight: '600' }}>
+            Authentic Photograph Coming Soon
+          </span>
+        </div>
+      )}
+
       {/* Dark Cinematic Gradient Overlay */}
       <div
         style={{
@@ -54,6 +90,27 @@ export default function HeritageCard({ item, variant = "popular" }) {
           >
             {item.category}
           </span>
+        </div>
+      )}
+
+      {/* Source attribution if present */}
+      {item.imageSource && (
+        <div
+          style={{
+            position: 'absolute',
+            top: '16px',
+            left: isPopular ? '16px' : 'auto',
+            right: isPopular ? 'auto' : '52px',
+            zIndex: 2,
+            backgroundColor: 'rgba(24, 14, 9, 0.75)',
+            color: '#E5C384',
+            fontSize: '0.68rem',
+            padding: '3px 8px',
+            borderRadius: 'var(--radius-sm)',
+            backdropFilter: 'blur(4px)'
+          }}
+        >
+          📷 {item.imageSource}
         </div>
       )}
 

@@ -3,16 +3,31 @@ import { useNavigate } from 'react-router-dom';
 import {
   MAHARASHTRA_DISTRICTS,
   MAHARASHTRA_MAP_VIEWBOX,
-  HIGHLIGHTED_DISTRICTS_LIST
+  HIGHLIGHTED_DISTRICTS_LIST,
+  HIGHLIGHTED_DISTRICT_IDS
 } from '../data/maharashtraMapData';
 
-// Specific visual label offsets for clear non-overlapping positioning
+// Specific visual label offsets and subtle leader line connections for clear non-overlapping positioning
 const DISTRICT_LABEL_OFFSETS = {
-  gadchiroli: { x: 10, y: 18 },
-  chandrapur: { x: -8, y: 18 },
-  nagpur: { x: 0, y: -18 },
-  kolhapur: { x: 0, y: 18 },
-  solapur: { x: 0, y: 18 }
+  gadchiroli: { x: 20, y: 22, hasLeader: true },
+  chandrapur: { x: -22, y: 22, hasLeader: true },
+  nagpur: { x: -10, y: -26, hasLeader: true },
+  wardha: { x: -26, y: 20, hasLeader: true },
+  bhandara: { x: 0, y: 28, hasLeader: true },
+  gondia: { x: 20, y: -26, hasLeader: true },
+  kolhapur: { x: 28, y: 20, hasLeader: true },
+  solapur: { x: 18, y: 24, hasLeader: true },
+  nashik: { x: 12, y: -24, hasLeader: true },
+  sindhudurg: { x: -32, y: 18, hasLeader: true },
+  sangli: { x: 38, y: -2, hasLeader: true },
+  satara: { x: -34, y: -16, hasLeader: true },
+  palghar: { x: -44, y: 0, hasLeader: true },
+  "chhatrapati-sambhajinagar": { x: 0, y: -26, hasLeader: true },
+  aurangabad: { x: 0, y: -26, hasLeader: true },
+  pune: { x: 36, y: 12, hasLeader: true },
+  raigad: { x: -46, y: 16, hasLeader: true },
+  dharashiv: { x: 0, y: -26, hasLeader: true },
+  osmanabad: { x: 0, y: -26, hasLeader: true }
 };
 
 export default function MaharashtraMapLandingPage() {
@@ -63,7 +78,7 @@ export default function MaharashtraMapLandingPage() {
         <p className="project-tagline-text">“आपल्या मातीचा, आपल्या लोकांचा.”</p>
       </header>
 
-      {/* MAP: Complete Maharashtra State Map in single view */}
+      {/* MAP: Complete Maharashtra State Map in single view with all 17 highlighted districts */}
       <main className="map-display-area" aria-label="Maharashtra State Map">
         <svg
           viewBox={MAHARASHTRA_MAP_VIEWBOX}
@@ -87,7 +102,7 @@ export default function MaharashtraMapLandingPage() {
           {/* Render all 36 Maharashtra Districts */}
           <g className="all-districts-group">
             {MAHARASHTRA_DISTRICTS.map((district) => {
-              const isHighlighted = district.isHighlighted;
+              const isHighlighted = HIGHLIGHTED_DISTRICT_IDS.includes(district.id);
               const isHovered = hoveredDistrictId === district.id;
 
               // Color styling
@@ -139,13 +154,13 @@ export default function MaharashtraMapLandingPage() {
             })}
           </g>
 
-          {/* Readable Labels & Touch Targets on the 5 Highlighted Districts */}
+          {/* Readable Labels, Leader Lines & Touch Targets on the 17 Highlighted Districts */}
           <g className="highlighted-labels-group">
             {HIGHLIGHTED_DISTRICTS_LIST.map((dist) => {
-              const geom = MAHARASHTRA_DISTRICTS.find((d) => d.id === dist.id);
+              const geom = MAHARASHTRA_DISTRICTS.find((d) => d.id === dist.id || (dist.id === 'chhatrapati-sambhajinagar' && d.id === 'aurangabad') || (dist.id === 'dharashiv' && d.id === 'osmanabad'));
               if (!geom || !geom.centroid) return null;
               const [cx, cy] = geom.centroid;
-              const isHovered = hoveredDistrictId === dist.id;
+              const isHovered = hoveredDistrictId === dist.id || (dist.id === 'chhatrapati-sambhajinagar' && hoveredDistrictId === 'aurangabad') || (dist.id === 'dharashiv' && hoveredDistrictId === 'osmanabad');
               const labelOffset = DISTRICT_LABEL_OFFSETS[dist.id] || { x: 0, y: 18 };
 
               return (
@@ -170,6 +185,20 @@ export default function MaharashtraMapLandingPage() {
                   {/* Expanded invisible touch hit-box for easy tapping on mobile */}
                   <circle r="46" fill="transparent" style={{ pointerEvents: 'all' }} />
 
+                  {/* Leader line if label is offset from district center */}
+                  {labelOffset.hasLeader && (
+                    <line
+                      x1="0"
+                      y1="0"
+                      x2={labelOffset.x}
+                      y2={labelOffset.y}
+                      stroke={isHovered ? '#FFFFFF' : 'rgba(247, 212, 136, 0.75)'}
+                      strokeWidth="1.2"
+                      strokeDasharray="2 2"
+                      style={{ transition: 'stroke 0.2s ease' }}
+                    />
+                  )}
+
                   {/* Pin Dot */}
                   <circle
                     r={isHovered ? '5.5' : '4.5'}
@@ -179,29 +208,42 @@ export default function MaharashtraMapLandingPage() {
                     style={{ transition: 'r 0.2s ease' }}
                   />
 
-                  {/* Label Card Pill */}
+                  {/* Label Card Pill with District Name & Landmark Identity */}
                   <g transform={`translate(${labelOffset.x}, ${labelOffset.y})`} filter="url(#label-shadow)">
                     <rect
-                      x="-44"
-                      y="-11"
-                      width="88"
-                      height="22"
-                      rx="11"
-                      fill={isHovered ? '#A8441A' : 'rgba(36, 24, 18, 0.92)'}
+                      x="-56"
+                      y="-15"
+                      width="112"
+                      height="30"
+                      rx="7"
+                      fill={isHovered ? '#A8441A' : 'rgba(36, 24, 18, 0.94)'}
                       stroke={isHovered ? '#FFFFFF' : '#C28A3D'}
-                      strokeWidth={isHovered ? '1.5' : '1'}
+                      strokeWidth={isHovered ? '1.8' : '1.1'}
                       style={{ transition: 'all 0.2s ease' }}
                     />
+                    {/* District Name */}
                     <text
                       textAnchor="middle"
-                      dominantBaseline="central"
+                      y="-3"
                       fill="#FFFFFF"
-                      fontSize="10.5"
+                      fontSize="9.2"
                       fontWeight="700"
-                      letterSpacing="0.4"
+                      letterSpacing="0.3"
                       fontFamily="var(--font-sans)"
                     >
                       {dist.name}
+                    </text>
+                    {/* Landmark / Heritage Specialty */}
+                    <text
+                      textAnchor="middle"
+                      y="8"
+                      fill={isHovered ? '#FFE8D6' : 'var(--color-heritage-gold)'}
+                      fontSize="6.8"
+                      fontWeight="600"
+                      letterSpacing="0.2"
+                      fontFamily="var(--font-sans)"
+                    >
+                      {dist.landmark}
                     </text>
                   </g>
                 </g>
@@ -316,7 +358,7 @@ export default function MaharashtraMapLandingPage() {
           stroke: #FFFFFF !important;
         }
 
-        /* MOBILE RESPONSIVE OPTIMIZATIONS (320px, 375px, 390px, 430px) */
+        /* MOBILE RESPONSIVE OPTIMIZATIONS */
         @media (max-width: 768px) {
           .opening-screen-container {
             padding: 12px 10px 8px 10px;

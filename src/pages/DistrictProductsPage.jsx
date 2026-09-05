@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { bambooCraftData } from '../data/bambooData';
 import OrnamentalDivider from '../components/OrnamentalDivider';
-import { MapPin, ArrowLeft, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { MapPin, ArrowLeft, ArrowRight, CheckCircle2, Sparkles } from 'lucide-react';
 
 export default function DistrictProductsPage() {
   const { districtId } = useParams();
@@ -247,24 +247,53 @@ export default function DistrictProductsPage() {
                 transition: 'all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)'
               }}
             >
-              {/* Real Product Image */}
+              {/* Real Product Image with Fallback */}
               <Link
                 to={`/crafts/bamboo/${district.id}/${product.id}`}
-                style={{ display: 'block', overflow: 'hidden', height: '240px', position: 'relative' }}
+                style={{ display: 'block', overflow: 'hidden', height: '240px', position: 'relative', backgroundColor: 'var(--bg-dark-brown)' }}
               >
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="product-card-img"
+                {product.image ? (
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="product-card-img"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      display: 'block',
+                      transition: 'transform 0.45s ease'
+                    }}
+                    loading="lazy"
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      if (e.target.nextSibling) e.target.nextSibling.style.display = 'flex';
+                    }}
+                  />
+                ) : null}
+
+                {/* Fallback "Authentic Photograph Coming Soon" */}
+                <div
                   style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                    display: 'block',
-                    transition: 'transform 0.45s ease'
+                    display: product.image ? 'none' : 'flex',
+                    position: 'absolute',
+                    inset: 0,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexDirection: 'column',
+                    gap: '8px',
+                    backgroundColor: '#3A2115',
+                    color: 'var(--color-heritage-gold)',
+                    padding: '20px',
+                    textAlign: 'center'
                   }}
-                  loading="lazy"
-                />
+                >
+                  <Sparkles size={28} />
+                  <span style={{ fontSize: '0.85rem', fontWeight: '600' }}>
+                    Authentic Photograph Coming Soon
+                  </span>
+                </div>
+
                 <div
                   style={{
                     position: 'absolute',

@@ -113,16 +113,47 @@ export default function BambooProductDetailPage() {
                 overflow: 'hidden'
               }}
             >
-              <img
-                src={product.image}
-                alt={product.name}
+              {product.image ? (
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    display: 'block'
+                  }}
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    if (e.target.nextSibling) e.target.nextSibling.style.display = 'flex';
+                  }}
+                />
+              ) : null}
+
+              {/* Fallback "Authentic Photograph Coming Soon" */}
+              <div
                 style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  display: 'block'
+                  display: product.image ? 'none' : 'flex',
+                  position: 'absolute',
+                  inset: 0,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexDirection: 'column',
+                  gap: '12px',
+                  backgroundColor: '#3A2115',
+                  color: 'var(--color-heritage-gold)',
+                  padding: '24px',
+                  textAlign: 'center'
                 }}
-              />
+              >
+                <Sparkles size={36} />
+                <span style={{ fontSize: '1.1rem', fontWeight: '600' }}>
+                  Authentic Photograph Coming Soon
+                </span>
+                <span style={{ fontSize: '0.85rem', color: 'rgba(247, 240, 227, 0.7)' }}>
+                  Verified archival imagery is being cataloged
+                </span>
+              </div>
 
               {/* Cultural Watermark Badge */}
               <div
@@ -145,6 +176,26 @@ export default function BambooProductDetailPage() {
               >
                 <Leaf size={14} /> Sustainable Forest Bamboo
               </div>
+
+              {/* Image Source Attribution */}
+              {product.imageSource && product.image && (
+                <div
+                  style={{
+                    position: 'absolute',
+                    bottom: '16px',
+                    left: '20px',
+                    backgroundColor: 'rgba(24, 14, 9, 0.8)',
+                    color: '#F7F0E3',
+                    border: '1px solid rgba(194, 138, 61, 0.3)',
+                    padding: '4px 10px',
+                    borderRadius: 'var(--radius-sm)',
+                    fontSize: '0.74rem',
+                    backdropFilter: 'blur(6px)'
+                  }}
+                >
+                  📷 Source: {product.imageSource}
+                </div>
+              )}
             </div>
 
             {/* Product Information Column */}
@@ -428,17 +479,38 @@ export default function BambooProductDetailPage() {
                   }}
                   className="related-craft-item"
                 >
-                  <img
-                    src={p.image}
-                    alt={p.name}
+                  {p.image ? (
+                    <img
+                      src={p.image}
+                      alt={p.name}
+                      style={{
+                        width: '72px',
+                        height: '72px',
+                        borderRadius: 'var(--radius-sm)',
+                        objectFit: 'cover',
+                        flexShrink: 0
+                      }}
+                      onError={(e) => {
+                        e.target.style.display = 'none';
+                        if (e.target.nextSibling) e.target.nextSibling.style.display = 'flex';
+                      }}
+                    />
+                  ) : null}
+                  <div
                     style={{
+                      display: p.image ? 'none' : 'flex',
                       width: '72px',
                       height: '72px',
                       borderRadius: 'var(--radius-sm)',
-                      objectFit: 'cover',
+                      backgroundColor: '#3A2115',
+                      color: 'var(--color-heritage-gold)',
+                      alignItems: 'center',
+                      justifyContent: 'center',
                       flexShrink: 0
                     }}
-                  />
+                  >
+                    <Sparkles size={20} />
+                  </div>
                   <div>
                     <h4
                       style={{
