@@ -30,13 +30,13 @@ export const HIGHLIGHTED_DISTRICTS_LIST = [
     id: "gadchiroli",
     name: "Gadchiroli",
     marathiName: "गडचिरोली",
-    landmark: "Bamboo Craft",
+    landmark: "Bamboo & Tribal Crafts",
     landmarkIcon: "🎋",
-    quote: "Discover authentic bamboo crafts and local products.",
-    description: "Vast deciduous forests with indigenous Gond & Madia bamboo crafts, wild cliff honey, and ancestral woodcraft.",
+    quote: "Discover authentic bamboo crafts, Rock Dhokra, Gond paintings & earthen pottery.",
+    description: "Vast deciduous forests with indigenous Gond & Madia bamboo crafts, patented Rock Dhokra sculptures, Gond paintings, and traditional earthen pottery.",
     route: "/district/gadchiroli",
     color: "#A8441A",
-    keyProducts: ["Bamboo Basket (Dala)", "Forest Honey", "Teak Woodcraft"]
+    keyProducts: ["Bamboo Crafts", "Rock Dhokra", "Gond Painting", "Earthen Pottery"]
   },
   {
     id: "chandrapur",

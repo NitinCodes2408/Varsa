@@ -392,6 +392,41 @@ export default function DistrictProductDetailPage() {
                   ))}
                 </div>
               </div>
+
+              {/* Material & Craft Notes */}
+              {(foundProduct.material || foundProduct.craftTechnique) && (
+                <div
+                  style={{
+                    borderTop: '1px solid rgba(194, 138, 61, 0.25)',
+                    marginTop: '20px',
+                    paddingTop: '16px',
+                    display: 'grid',
+                    gridTemplateColumns: '1fr 1fr',
+                    gap: '12px'
+                  }}
+                >
+                  {foundProduct.material && (
+                    <div>
+                      <span style={{ fontSize: '0.74rem', color: 'var(--color-text-muted)', textTransform: 'uppercase', fontWeight: '700', display: 'block' }}>
+                        Material
+                      </span>
+                      <span style={{ fontSize: '0.88rem', color: 'var(--bg-dark-brown)', fontWeight: '600' }}>
+                        {foundProduct.material}
+                      </span>
+                    </div>
+                  )}
+                  {foundProduct.craftTechnique && (
+                    <div>
+                      <span style={{ fontSize: '0.74rem', color: 'var(--color-text-muted)', textTransform: 'uppercase', fontWeight: '700', display: 'block' }}>
+                        Technique
+                      </span>
+                      <span style={{ fontSize: '0.88rem', color: 'var(--bg-dark-brown)', fontWeight: '600' }}>
+                        {foundProduct.craftTechnique}
+                      </span>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </div>

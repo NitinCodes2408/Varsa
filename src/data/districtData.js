@@ -21,11 +21,11 @@ export const DISTRICT_LIST = [
     id: "gadchiroli",
     name: "Gadchiroli",
     marathiName: "गडचिरोली",
-    tagline: "Forest bamboo crafts, wild produce and indigenous tribal traditions of Gadchiroli.",
+    tagline: "Forest bamboo crafts, Rock Dhokra, Gond paintings and indigenous earthen pottery of Gadchiroli.",
     image: "/images/gadchiroli/bamboo/image.jfif",
     imageSource: "Field Archive, Gadchiroli",
     imageLicense: "Verified Local Archive",
-    keyHighlight: "Forest Bamboo Craft & Wild Forest Produce"
+    keyHighlight: "Bamboo Craft, Rock Dhokra, Gond Painting & Pottery"
   },
   {
     id: "chandrapur",
@@ -335,9 +335,276 @@ export const districtData = {
           processFlow: "Raw Bamboo → Cutting & Preparation → Splitting / Shaping → Weaving / Assembly → Finishing → Finished Product"
         }
       ],
-      "rock-dhokra": [],
-      "gond-painting": [],
-      "earthen-pottery": []
+      "rock-dhokra": [
+        {
+          id: "rock-dhokra-ganpati",
+          name: "Rock Dhokra Ganesha Figurine",
+          marathiName: "रॉक ढोकरा गणपती मूर्ती",
+          categoryId: "rock-dhokra",
+          district: "Gadchiroli, Maharashtra",
+          village: "Bhamragad & STRC Gondwana Cluster, Gadchiroli",
+          image: "/images/gadchiroli/rock-dhokra/rock-dhokra-ganpati.jpg",
+          imageSource: "Devrai Art Village & Suresh Pungati Archive",
+          imageLicense: "Verified Artisanal Registry",
+          isVerified: true,
+          about:
+            "An authentic patented Rock Dhokra sculpture fusing polished local river stone with lost-wax cast bell metal brass depicting Lord Ganesha with intricate tribal jali ornamentation, pioneered in collaboration with master artisan Suresh Pungati from Gadchiroli.",
+          uses: [
+            "Sacred puja altar & home spiritual corner",
+            "Aesthetic heritage centerpiece & art collection",
+            "Sustainable tribal artisanal gifting"
+          ],
+          material: "Riverbed Basalt Stone, Recycled Brass & Bell Metal Alloy, Beeswax",
+          craftTechnique: "Direct fusion lost-wax casting (Cire Perdue) bonded over natural river rock",
+          processFlow: "River Stone Selection → Clay & Beeswax Modeling → Mold Encasement → Metal Melting & Pouring → Cooling & Mold Break → Finishing & Polishing"
+        },
+        {
+          id: "rock-dhokra-shiva-nandi",
+          name: "Rock Dhokra Shiva on Nandi",
+          marathiName: "रॉक ढोकरा शिव-नंदी शिल्प",
+          categoryId: "rock-dhokra",
+          district: "Gadchiroli, Maharashtra",
+          village: "Bhamragad & STRC Gondwana Cluster, Gadchiroli",
+          image: "/images/gadchiroli/rock-dhokra/rock-dhokra-shiva-nandi.jpg",
+          imageSource: "Devrai Art Village & Suresh Pungati Archive",
+          imageLicense: "Verified Artisanal Registry",
+          isVerified: true,
+          about:
+            "A masterwork sculpture depicting Lord Shiva seated upon the sacred Nandi, crafted by seamlessly fusing textured brass lost-wax filaments onto a natural water-eroded river rock core.",
+          uses: [
+            "Spiritual altar & temple decor",
+            "Prestige cultural art collectible",
+            "Generational heritage gift"
+          ],
+          material: "Natural Godavari/Indravati River Stone, Brass Alloy, Beeswax Core",
+          craftTechnique: "Lost-wax filament sculpting wrapped directly around curved river stone",
+          processFlow: "River Stone Selection → Clay & Beeswax Modeling → Mold Encasement → Metal Melting & Pouring → Cooling & Mold Break → Finishing & Polishing"
+        },
+        {
+          id: "rock-dhokra-standing-nandi",
+          name: "Rock Dhokra Standing Nandi",
+          marathiName: "रॉक ढोकरा नंदी शिल्प",
+          categoryId: "rock-dhokra",
+          district: "Gadchiroli, Maharashtra",
+          village: "Bhamragad & STRC Gondwana Cluster, Gadchiroli",
+          image: "/images/gadchiroli/rock-dhokra/rock-dhokra-standing-nandi.jpg",
+          imageSource: "Devrai Art Village & Suresh Pungati Archive",
+          imageLicense: "Verified Artisanal Registry",
+          isVerified: true,
+          about:
+            "A majestic tribal representation of Nandi, the sacred bull, whose body is shaped from an organic river stone base with brass horns, dewlap, and fine mesh embellishments cast into one solid piece.",
+          uses: [
+            "Living room mantelpiece and cultural display",
+            "Vastu and sacred energy space placement",
+            "Art collector heirloom"
+          ],
+          material: "Hard River Basalt, Molten Bell Metal, Natural Resin",
+          craftTechnique: "Cire Perdue lost-wax metal fusion with stone anchoring",
+          processFlow: "River Stone Selection → Clay & Beeswax Modeling → Mold Encasement → Metal Melting & Pouring → Cooling & Mold Break → Finishing & Polishing"
+        },
+        {
+          id: "rock-dhokra-annapakshi",
+          name: "Rock Dhokra Sacred Forest Bird (Annapakshi)",
+          marathiName: "रॉक ढोकरा अन्नपक्षी (पक्षी शिल्प)",
+          categoryId: "rock-dhokra",
+          district: "Gadchiroli, Maharashtra",
+          village: "Bhamragad & STRC Gondwana Cluster, Gadchiroli",
+          image: "/images/gadchiroli/rock-dhokra/rock-dhokra-annapakshi.jpg",
+          imageSource: "Devrai Art Village & Suresh Pungati Archive",
+          imageLicense: "Verified Artisanal Registry",
+          isVerified: true,
+          about:
+            "An elegant tribal avian sculpture celebrating forest wildlife, combining the density and natural curves of river rock with ornate cast brass plumes, wings, and delicate beak details.",
+          uses: [
+            "Art gallery & ambient home interior showcase",
+            "Symbol of abundance and harmony with nature",
+            "Eco-luxe handcrafted souvenir"
+          ],
+          material: "River Rock, Brass & Bronze Scrap, Organic Beeswax",
+          craftTechnique: "Organic Lost-Wax direct-to-stone casting",
+          processFlow: "River Stone Selection → Clay & Beeswax Modeling → Mold Encasement → Metal Melting & Pouring → Cooling & Mold Break → Finishing & Polishing"
+        }
+      ],
+      "gond-painting": [
+        {
+          id: "gond-peacock-family",
+          name: "Peacock Family Gond Painting",
+          marathiName: "मयूर कुटुंब गोंड चित्रकला",
+          categoryId: "gond-painting",
+          district: "Gadchiroli, Maharashtra",
+          village: "Aheri & Etapalli Clusters, Gadchiroli",
+          image: "/images/gadchiroli/gond-painting/gond-peacock-family.jpg",
+          imageSource: "Wikimedia Commons (Gond Art Collection)",
+          imageLicense: "CC BY-SA 4.0",
+          isVerified: true,
+          about:
+            "A vibrant authentic Gond painting celebrating the sacred peacock family, crafted using fine dotting and linear rhythmic patterns that symbolize monsoon arrival, forest vitality, and family protection in Gondwana folk belief.",
+          uses: [
+            "Art gallery wall framing & interior aesthetic",
+            "Cultural appreciation and storytelling",
+            "Traditional housewarming and festival gifting"
+          ],
+          material: "Natural earth pigments, acrylic gouache on handmade rag paper",
+          craftTechnique: "Digna wall art style with signature Gond micro-dotting and line patterning",
+          processFlow: "Surface Preparation → Natural Charcoal Outlining → Base Color Fill → Intricate Dot & Line Texturing → Natural Lacquer Sealing"
+        },
+        {
+          id: "gond-elephant-tree",
+          name: "Elephant with Tree of Life Gond Painting",
+          marathiName: "कल्पवृक्ष व हत्ती गोंड चित्रकला",
+          categoryId: "gond-painting",
+          district: "Gadchiroli, Maharashtra",
+          village: "Aheri & Bhamragad Forests, Gadchiroli",
+          image: "/images/gadchiroli/gond-painting/gond-elephant-tree.jpg",
+          imageSource: "Wikimedia Commons (Gond Art Collection)",
+          imageLicense: "CC BY-SA 4.0",
+          isVerified: true,
+          about:
+            "A profound indigenous painting capturing the symbiotic bond between the forest elephant and the sacred Mahua/Banyan Tree of Life, depicting how all woodland creatures draw sustenance and sanctuary from the forest canopy.",
+          uses: [
+            "Heritage wall art for homes and cultural centers",
+            "Living room focal centerpiece",
+            "Traditional artistic gifting"
+          ],
+          material: "Natural mineral dyes, organic gum binder on archival canvas",
+          craftTechnique: "Generational Gond line-and-dash signature motif work",
+          processFlow: "Surface Preparation → Natural Charcoal Outlining → Base Color Fill → Intricate Dot & Line Texturing → Natural Lacquer Sealing"
+        },
+        {
+          id: "gond-forest-birds",
+          name: "Forest Birds & Mahua Tree Gond Painting",
+          marathiName: "वनपक्षी व महुआ वृक्ष गोंड चित्रकला",
+          categoryId: "gond-painting",
+          district: "Gadchiroli, Maharashtra",
+          village: "Etapalli & Dhanora Tribal Belts, Gadchiroli",
+          image: "/images/gadchiroli/gond-painting/gond-forest-birds.jpg",
+          imageSource: "Wikimedia Commons (Gond Tribal Archive)",
+          imageLicense: "CC BY-SA 4.0",
+          isVerified: true,
+          about:
+            "A detailed pictorial tribute to the avifauna of Gadchiroli forests resting among flowering Mahua branches, rendered in delicate multicolored stippling that evokes movement and forest song.",
+          uses: [
+            "Eco-art and contemporary interior enhancement",
+            "Educational display of indigenous folklore",
+            "Artisan collector piece"
+          ],
+          material: "Handmade archival sheet, mineral oxides, fine squirrel-hair brushwork",
+          craftTechnique: "Freehand geometric dotting and contour rhythm",
+          processFlow: "Surface Preparation → Natural Charcoal Outlining → Base Color Fill → Intricate Dot & Line Texturing → Natural Lacquer Sealing"
+        },
+        {
+          id: "gond-sacred-deer",
+          name: "Sacred Forest Deer (Harin) Gond Painting",
+          marathiName: "अरण्य हरिण गोंड चित्रकला",
+          categoryId: "gond-painting",
+          district: "Gadchiroli, Maharashtra",
+          village: "Chamorshi & Aheri Clusters, Gadchiroli",
+          image: "/images/gadchiroli/gond-painting/gond-sacred-deer.jpg",
+          imageSource: "Wikimedia Commons (Gond Tribal Archive)",
+          imageLicense: "CC BY-SA 4.0",
+          isVerified: true,
+          about:
+            "Depicts the graceful forest deer (Harin), regarded by Gond folklore as the swift messenger of forest deity Bada Dev. Illustrated with intricate scale patterns, dots, and warm earth tones.",
+          uses: [
+            "Living room and study room decor",
+            "Cultural gifting for nature lovers",
+            "Tribal artwork collection"
+          ],
+          material: "Earth pigments, cow-dung wash paper base, gouache",
+          craftTechnique: "Traditional Digna outline with organic pigment filling",
+          processFlow: "Surface Preparation → Natural Charcoal Outlining → Base Color Fill → Intricate Dot & Line Texturing → Natural Lacquer Sealing"
+        }
+      ],
+      "earthen-pottery": [
+        {
+          id: "clay-matka",
+          name: "Traditional Clay Matka / Dergi Water Pot",
+          marathiName: "पारंपरिक मातीचे मडके / देर्गी (जलपात्र)",
+          categoryId: "earthen-pottery",
+          district: "Gadchiroli, Maharashtra",
+          village: "Armori & Chamorshi Kumbhar Wada, Gadchiroli",
+          image: "/images/gadchiroli/earthen-pottery/clay-matka.jpg",
+          imageSource: "Wikimedia Commons / Vidarbha Rural Craft Documentation",
+          imageLicense: "CC BY-SA 4.0",
+          isVerified: true,
+          about:
+            "A hand-thrown red clay water pot fashioned on a traditional potter's wheel using mineral-rich Wainganga riverbed silt. Naturally porous walls enable natural evaporative cooling, infusing water with natural minerals.",
+          uses: [
+            "Natural evaporative water cooling during hot summers",
+            "Daily healthy alkaline drinking water storage",
+            "Ritual and auspicious festive ceremonies"
+          ],
+          material: "Wainganga riverbed alluvial red clay, rice husk, natural river sand",
+          craftTechnique: "Wheel throwing followed by wooden paddle-and-anvil (Thapni-Kundi) beating",
+          processFlow: "Clay Mining & Sieving → Kneading & Maturing → Wheel Throwing → Paddle Beating (Thapni) → Sun Drying → Wood-fired Kiln Baking (Bhatti)"
+        },
+        {
+          id: "terracotta-diya",
+          name: "Handcrafted Terracotta Oil Diya",
+          marathiName: "हस्तनिर्मित मातीचा दिवा (पणती / दीप)",
+          categoryId: "earthen-pottery",
+          district: "Gadchiroli, Maharashtra",
+          village: "Kurkheda & Armori Clusters, Gadchiroli",
+          image: "/images/gadchiroli/earthen-pottery/terracotta-diya.jpg",
+          imageSource: "Wikimedia Commons (Artisanal Pottery Archive)",
+          imageLicense: "CC BY-SA 3.0",
+          isVerified: true,
+          about:
+            "A traditional clay oil lamp hand-pinched and wheel-spun by local potter families. Designed with a curved wick groove for sustained steady flame during Diwali, Pola, and sacred village festivals.",
+          uses: [
+            "Diwali, Pola, and temple festival illumination",
+            "Daily evening altar lighting (Sandhya Deep)",
+            "Eco-friendly natural festive celebration"
+          ],
+          material: "Refined terracotta clay, natural red ochre (Geru) slip",
+          craftTechnique: "Hand pinching, rim detailing, and low-temperature pit firing",
+          processFlow: "Clay Mining & Sieving → Kneading & Maturing → Wheel Throwing → Paddle Beating (Thapni) → Sun Drying → Wood-fired Kiln Baking (Bhatti)"
+        },
+        {
+          id: "clay-cooking-handi",
+          name: "Traditional Clay Cooking Handi",
+          marathiName: "पारंपरिक मातीची हांडी / मटकी (स्वयंपाक भांडे)",
+          categoryId: "earthen-pottery",
+          district: "Gadchiroli, Maharashtra",
+          village: "Chamorshi & Dhanora Clusters, Gadchiroli",
+          image: "/images/gadchiroli/earthen-pottery/clay-cooking-handi.jpg",
+          imageSource: "Wikimedia Commons (Traditional Cookware Archive)",
+          imageLicense: "CC BY-SA 4.0",
+          isVerified: true,
+          about:
+            "An unglazed thick-walled clay cooking vessel engineered for uniform heat retention and slow wood-fire cooking. Retains natural moisture and nutrients while imparting an authentic earthy aroma.",
+          uses: [
+            "Slow cooking of traditional lentils, pulses, and country chicken",
+            "Earthy rice and biryani preparation",
+            "Healthy, chemical-free toxinless cooking"
+          ],
+          material: "Heavy-density alluvial clay, fine mica sand, organic wood ash",
+          craftTechnique: "Reinforced wall wheel throwing and slow bonfire kiln baking",
+          processFlow: "Clay Mining & Sieving → Kneading & Maturing → Wheel Throwing → Paddle Beating (Thapni) → Sun Drying → Wood-fired Kiln Baking (Bhatti)"
+        },
+        {
+          id: "terracotta-votive-craft",
+          name: "Terracotta Tribal Votive Sculpture",
+          marathiName: "मातीचे ग्रामदैवत शिल्प व मूर्ती",
+          categoryId: "earthen-pottery",
+          district: "Gadchiroli, Maharashtra",
+          village: "Aheri, Armori & STRC Gondwana Project, Gadchiroli",
+          image: "/images/gadchiroli/earthen-pottery/terracotta-votive-craft.jpg",
+          imageSource: "Wikimedia Commons (Tribal Terracotta Archive)",
+          imageLicense: "CC BY-SA 4.0",
+          isVerified: true,
+          about:
+            "Hand-sculpted terracotta figurines representing guardian spirits, elephants, horses, and sacred folk icons venerated at sacred village groves (Devrai / Gaondeo) across Gondwana settlements.",
+          uses: [
+            "Sacred grove offering and village shrine protection",
+            "Heritage home decoration & artistic mantelpiece",
+            "Adivasi cultural art collection"
+          ],
+          material: "Natural clay mixture, river sand, organic rice straw ash",
+          craftTechnique: "Hand modeling, applique clay relief, and open-pit wood firing",
+          processFlow: "Clay Mining & Sieving → Kneading & Maturing → Wheel Throwing → Paddle Beating (Thapni) → Sun Drying → Wood-fired Kiln Baking (Bhatti)"
+        }
+      ]
     }
   },
 

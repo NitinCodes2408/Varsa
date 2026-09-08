@@ -524,6 +524,401 @@ export default function DistrictPage() {
               </div>
             )}
 
+            {/* Dedicated Gadchiroli Rock Dhokra Heritage Section */}
+            {district.id === 'gadchiroli' && activeCategory === 'rock-dhokra' && (
+              <div
+                style={{
+                  backgroundColor: '#EDE1CF',
+                  borderRadius: 'var(--radius-xl)',
+                  border: '1.5px solid rgba(194, 138, 61, 0.35)',
+                  padding: '30px 28px',
+                  marginBottom: '36px',
+                  boxShadow: 'var(--shadow-subtle)'
+                }}
+              >
+                {/* Category Subtitle & Title */}
+                <div style={{ marginBottom: '18px' }}>
+                  <span
+                    style={{
+                      fontSize: '0.76rem',
+                      fontWeight: '700',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.8px',
+                      color: 'var(--color-terracotta)',
+                      display: 'block',
+                      marginBottom: '8px'
+                    }}
+                  >
+                    🗿 Traditional Stone & Metal Craft of Gadchiroli
+                  </span>
+                  <h3
+                    style={{
+                      fontFamily: 'var(--font-serif)',
+                      fontSize: '1.6rem',
+                      color: 'var(--bg-dark-brown)',
+                      margin: '0 0 10px 0',
+                      fontWeight: '600'
+                    }}
+                  >
+                    Rock Dhokra
+                  </h3>
+                  <p
+                    style={{
+                      fontFamily: 'var(--font-serif)',
+                      fontSize: '1.12rem',
+                      color: 'var(--bg-dark-brown)',
+                      lineHeight: 1.65,
+                      margin: 0,
+                      fontWeight: '500'
+                    }}
+                  >
+                    “Rock Dhokra is a distinctive craft that combines stone and metal using the lost-wax casting technique. The craft is associated with artisans from the Gadchiroli region and has been developed into contemporary forms through Gondwana Craft, master artisan Suresh Pungati, and collaborating artisan communities.”
+                  </p>
+                </div>
+
+                {/* Making Process */}
+                <div
+                  style={{
+                    borderTop: '1px solid rgba(194, 138, 61, 0.25)',
+                    paddingTop: '20px'
+                  }}
+                >
+                  <span
+                    style={{
+                      fontSize: '0.76rem',
+                      fontWeight: '700',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.8px',
+                      color: 'var(--bg-dark-brown)',
+                      display: 'block',
+                      marginBottom: '12px'
+                    }}
+                  >
+                    Traditional Lost-Wax & Stone Integration Process
+                  </span>
+
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      flexWrap: 'wrap',
+                      gap: '8px 10px',
+                      fontSize: '0.88rem',
+                      fontWeight: '600'
+                    }}
+                  >
+                    <span style={{ backgroundColor: 'rgba(58, 33, 21, 0.08)', color: 'var(--bg-dark-brown)', padding: '6px 14px', borderRadius: 'var(--radius-sm)', border: '1px solid rgba(194, 138, 61, 0.3)' }}>
+                      Stone Selection
+                    </span>
+                    <span style={{ color: 'var(--color-terracotta)', fontWeight: 'bold' }}>→</span>
+                    <span style={{ backgroundColor: 'rgba(58, 33, 21, 0.08)', color: 'var(--bg-dark-brown)', padding: '6px 14px', borderRadius: 'var(--radius-sm)', border: '1px solid rgba(194, 138, 61, 0.3)' }}>
+                      Clay & Beeswax Modeling
+                    </span>
+                    <span style={{ color: 'var(--color-terracotta)', fontWeight: 'bold' }}>→</span>
+                    <span style={{ backgroundColor: 'rgba(58, 33, 21, 0.08)', color: 'var(--bg-dark-brown)', padding: '6px 14px', borderRadius: 'var(--radius-sm)', border: '1px solid rgba(194, 138, 61, 0.3)' }}>
+                      Mold Encasement
+                    </span>
+                    <span style={{ color: 'var(--color-terracotta)', fontWeight: 'bold' }}>→</span>
+                    <span style={{ backgroundColor: 'rgba(58, 33, 21, 0.08)', color: 'var(--bg-dark-brown)', padding: '6px 14px', borderRadius: 'var(--radius-sm)', border: '1px solid rgba(194, 138, 61, 0.3)' }}>
+                      Molten Brass Pouring
+                    </span>
+                    <span style={{ color: 'var(--color-terracotta)', fontWeight: 'bold' }}>→</span>
+                    <span style={{ backgroundColor: 'rgba(58, 33, 21, 0.08)', color: 'var(--bg-dark-brown)', padding: '6px 14px', borderRadius: 'var(--radius-sm)', border: '1px solid rgba(194, 138, 61, 0.3)' }}>
+                      Finishing & Polish
+                    </span>
+                    <span style={{ color: 'var(--color-terracotta)', fontWeight: 'bold' }}>→</span>
+                    <span style={{ backgroundColor: 'var(--color-terracotta)', color: '#FFFFFF', padding: '6px 14px', borderRadius: 'var(--radius-sm)', boxShadow: '0 2px 8px rgba(168, 68, 26, 0.3)' }}>
+                      Finished Artefact
+                    </span>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Dedicated Gadchiroli Gond Painting Heritage Section */}
+            {district.id === 'gadchiroli' && activeCategory === 'gond-painting' && (
+              <div
+                style={{
+                  backgroundColor: '#EDE1CF',
+                  borderRadius: 'var(--radius-xl)',
+                  border: '1.5px solid rgba(194, 138, 61, 0.35)',
+                  padding: '30px 28px',
+                  marginBottom: '36px',
+                  boxShadow: 'var(--shadow-subtle)'
+                }}
+              >
+                {/* Category Subtitle & Title */}
+                <div style={{ marginBottom: '18px' }}>
+                  <span
+                    style={{
+                      fontSize: '0.76rem',
+                      fontWeight: '700',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.8px',
+                      color: 'var(--color-terracotta)',
+                      display: 'block',
+                      marginBottom: '8px'
+                    }}
+                  >
+                    🎨 Traditional Gondwana Tribal Art of Gadchiroli
+                  </span>
+                  <h3
+                    style={{
+                      fontFamily: 'var(--font-serif)',
+                      fontSize: '1.6rem',
+                      color: 'var(--bg-dark-brown)',
+                      margin: '0 0 10px 0',
+                      fontWeight: '600'
+                    }}
+                  >
+                    Gond Painting (गोंड चित्रकला)
+                  </h3>
+                  <p
+                    style={{
+                      fontFamily: 'var(--font-serif)',
+                      fontSize: '1.12rem',
+                      color: 'var(--bg-dark-brown)',
+                      lineHeight: 1.65,
+                      margin: 0,
+                      fontWeight: '500'
+                    }}
+                  >
+                    “Gond painting is an ancient living indigenous art form rooted in the sacred belief that looking at good images begets good fortune. Tribal artists from Gadchiroli and Gondwana express deep communion with the forest world, animating flora, fauna, and folklore through signature patterns of dots, dashes, and rhythmic lines.”
+                  </p>
+                </div>
+
+                {/* Heritage Story */}
+                <div
+                  style={{
+                    borderTop: '1px solid rgba(194, 138, 61, 0.25)',
+                    paddingTop: '20px',
+                    marginBottom: '22px'
+                  }}
+                >
+                  <h4
+                    style={{
+                      fontFamily: 'var(--font-serif)',
+                      fontSize: '1.25rem',
+                      color: 'var(--color-terracotta)',
+                      margin: '0 0 8px 0',
+                      fontWeight: '600'
+                    }}
+                  >
+                    Why Gond Art Matters in Gadchiroli
+                  </h4>
+                  <p
+                    style={{
+                      fontSize: '0.96rem',
+                      color: 'var(--bg-dark-brown)',
+                      lineHeight: 1.65,
+                      margin: 0
+                    }}
+                  >
+                    Gadchiroli is the historic heartland of Gond and Madia Adivasi communities. Originally painted as *Digna* geometrical wall art on mud homes during harvest festivals, weddings, and sacred village ceremonies, Gond paintings capture sacred trees (Mahua, Peepal), wild animals, and folklore deities (*Bada Dev*) with vivid visual lyricism.
+                  </p>
+                </div>
+
+                {/* Making Process */}
+                <div
+                  style={{
+                    borderTop: '1px solid rgba(194, 138, 61, 0.25)',
+                    paddingTop: '20px'
+                  }}
+                >
+                  <span
+                    style={{
+                      fontSize: '0.76rem',
+                      fontWeight: '700',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.8px',
+                      color: 'var(--bg-dark-brown)',
+                      display: 'block',
+                      marginBottom: '12px'
+                    }}
+                  >
+                    Traditional Gond Painting Technique
+                  </span>
+
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      flexWrap: 'wrap',
+                      gap: '8px 10px',
+                      fontSize: '0.88rem',
+                      fontWeight: '600'
+                    }}
+                  >
+                    <span style={{ backgroundColor: 'rgba(58, 33, 21, 0.08)', color: 'var(--bg-dark-brown)', padding: '6px 14px', borderRadius: 'var(--radius-sm)', border: '1px solid rgba(194, 138, 61, 0.3)' }}>
+                      Surface Preparation
+                    </span>
+                    <span style={{ color: 'var(--color-terracotta)', fontWeight: 'bold' }}>→</span>
+                    <span style={{ backgroundColor: 'rgba(58, 33, 21, 0.08)', color: 'var(--bg-dark-brown)', padding: '6px 14px', borderRadius: 'var(--radius-sm)', border: '1px solid rgba(194, 138, 61, 0.3)' }}>
+                      Natural Charcoal Outline
+                    </span>
+                    <span style={{ color: 'var(--color-terracotta)', fontWeight: 'bold' }}>→</span>
+                    <span style={{ backgroundColor: 'rgba(58, 33, 21, 0.08)', color: 'var(--bg-dark-brown)', padding: '6px 14px', borderRadius: 'var(--radius-sm)', border: '1px solid rgba(194, 138, 61, 0.3)' }}>
+                      Base Color Fill
+                    </span>
+                    <span style={{ color: 'var(--color-terracotta)', fontWeight: 'bold' }}>→</span>
+                    <span style={{ backgroundColor: 'rgba(58, 33, 21, 0.08)', color: 'var(--bg-dark-brown)', padding: '6px 14px', borderRadius: 'var(--radius-sm)', border: '1px solid rgba(194, 138, 61, 0.3)' }}>
+                      Dot & Line Texturing
+                    </span>
+                    <span style={{ color: 'var(--color-terracotta)', fontWeight: 'bold' }}>→</span>
+                    <span style={{ backgroundColor: 'rgba(58, 33, 21, 0.08)', color: 'var(--bg-dark-brown)', padding: '6px 14px', borderRadius: 'var(--radius-sm)', border: '1px solid rgba(194, 138, 61, 0.3)' }}>
+                      Detail Layering
+                    </span>
+                    <span style={{ color: 'var(--color-terracotta)', fontWeight: 'bold' }}>→</span>
+                    <span style={{ backgroundColor: 'var(--color-terracotta)', color: '#FFFFFF', padding: '6px 14px', borderRadius: 'var(--radius-sm)', boxShadow: '0 2px 8px rgba(168, 68, 26, 0.3)' }}>
+                      Finished Artwork
+                    </span>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Dedicated Gadchiroli Earthen Pottery Heritage Section */}
+            {district.id === 'gadchiroli' && activeCategory === 'earthen-pottery' && (
+              <div
+                style={{
+                  backgroundColor: '#EDE1CF',
+                  borderRadius: 'var(--radius-xl)',
+                  border: '1.5px solid rgba(194, 138, 61, 0.35)',
+                  padding: '30px 28px',
+                  marginBottom: '36px',
+                  boxShadow: 'var(--shadow-subtle)'
+                }}
+              >
+                {/* Category Subtitle & Title */}
+                <div style={{ marginBottom: '18px' }}>
+                  <span
+                    style={{
+                      fontSize: '0.76rem',
+                      fontWeight: '700',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.8px',
+                      color: 'var(--color-terracotta)',
+                      display: 'block',
+                      marginBottom: '8px'
+                    }}
+                  >
+                    🏺 Traditional Clay Craft & Terracotta Heritage of Gadchiroli
+                  </span>
+                  <h3
+                    style={{
+                      fontFamily: 'var(--font-serif)',
+                      fontSize: '1.6rem',
+                      color: 'var(--bg-dark-brown)',
+                      margin: '0 0 10px 0',
+                      fontWeight: '600'
+                    }}
+                  >
+                    Earthen Pottery (मातीची भांडी व शिल्पे)
+                  </h3>
+                  <p
+                    style={{
+                      fontFamily: 'var(--font-serif)',
+                      fontSize: '1.12rem',
+                      color: 'var(--bg-dark-brown)',
+                      lineHeight: 1.65,
+                      margin: 0,
+                      fontWeight: '500'
+                    }}
+                  >
+                    “Earthen pottery in Gadchiroli is an unbroken artisanal lineage sustained by traditional Kumbhar families and tribal artisans. Crafted using nutrient-rich Wainganga riverbed clay, these sustainable terracotta vessels, water pots, and sacred votives embody an organic harmony between earth, water, and fire.”
+                  </p>
+                </div>
+
+                {/* Heritage Story */}
+                <div
+                  style={{
+                    borderTop: '1px solid rgba(194, 138, 61, 0.25)',
+                    paddingTop: '20px',
+                    marginBottom: '22px'
+                  }}
+                >
+                  <h4
+                    style={{
+                      fontFamily: 'var(--font-serif)',
+                      fontSize: '1.25rem',
+                      color: 'var(--color-terracotta)',
+                      margin: '0 0 8px 0',
+                      fontWeight: '600'
+                    }}
+                  >
+                    Why Clay Craft Matters in Gadchiroli
+                  </h4>
+                  <p
+                    style={{
+                      fontSize: '0.96rem',
+                      color: 'var(--bg-dark-brown)',
+                      lineHeight: 1.65,
+                      margin: 0
+                    }}
+                  >
+                    Across the riverine tracts and rural hamlets of Armori, Chamorshi, and Kurkheda, earthen pottery remains indispensable to daily life and tribal rituals. Supported by initiatives like the Science & Technology Resource Centre (STRC) at Gondwana University, Gadchiroli's potters combine ancestral wheel-throwing and paddle-beating techniques to produce natural evaporative water pots, clay cookware, and sacred village idols.
+                  </p>
+                </div>
+
+                {/* Making Process */}
+                <div
+                  style={{
+                    borderTop: '1px solid rgba(194, 138, 61, 0.25)',
+                    paddingTop: '20px'
+                  }}
+                >
+                  <span
+                    style={{
+                      fontSize: '0.76rem',
+                      fontWeight: '700',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.8px',
+                      color: 'var(--bg-dark-brown)',
+                      display: 'block',
+                      marginBottom: '12px'
+                    }}
+                  >
+                    Traditional Pottery Making Process
+                  </span>
+
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      flexWrap: 'wrap',
+                      gap: '8px 10px',
+                      fontSize: '0.88rem',
+                      fontWeight: '600'
+                    }}
+                  >
+                    <span style={{ backgroundColor: 'rgba(58, 33, 21, 0.08)', color: 'var(--bg-dark-brown)', padding: '6px 14px', borderRadius: 'var(--radius-sm)', border: '1px solid rgba(194, 138, 61, 0.3)' }}>
+                      Clay Mining & Sieving
+                    </span>
+                    <span style={{ color: 'var(--color-terracotta)', fontWeight: 'bold' }}>→</span>
+                    <span style={{ backgroundColor: 'rgba(58, 33, 21, 0.08)', color: 'var(--bg-dark-brown)', padding: '6px 14px', borderRadius: 'var(--radius-sm)', border: '1px solid rgba(194, 138, 61, 0.3)' }}>
+                      Kneading & Maturing
+                    </span>
+                    <span style={{ color: 'var(--color-terracotta)', fontWeight: 'bold' }}>→</span>
+                    <span style={{ backgroundColor: 'rgba(58, 33, 21, 0.08)', color: 'var(--bg-dark-brown)', padding: '6px 14px', borderRadius: 'var(--radius-sm)', border: '1px solid rgba(194, 138, 61, 0.3)' }}>
+                      Wheel Throwing
+                    </span>
+                    <span style={{ color: 'var(--color-terracotta)', fontWeight: 'bold' }}>→</span>
+                    <span style={{ backgroundColor: 'rgba(58, 33, 21, 0.08)', color: 'var(--bg-dark-brown)', padding: '6px 14px', borderRadius: 'var(--radius-sm)', border: '1px solid rgba(194, 138, 61, 0.3)' }}>
+                      Paddle Beating (Thapni)
+                    </span>
+                    <span style={{ color: 'var(--color-terracotta)', fontWeight: 'bold' }}>→</span>
+                    <span style={{ backgroundColor: 'rgba(58, 33, 21, 0.08)', color: 'var(--bg-dark-brown)', padding: '6px 14px', borderRadius: 'var(--radius-sm)', border: '1px solid rgba(194, 138, 61, 0.3)' }}>
+                      Sun Drying & Slip
+                    </span>
+                    <span style={{ color: 'var(--color-terracotta)', fontWeight: 'bold' }}>→</span>
+                    <span style={{ backgroundColor: 'var(--color-terracotta)', color: '#FFFFFF', padding: '6px 14px', borderRadius: 'var(--radius-sm)', boxShadow: '0 2px 8px rgba(168, 68, 26, 0.3)' }}>
+                      Kiln Baking (Bhatti)
+                    </span>
+                  </div>
+                </div>
+              </div>
+            )}
+
             {/* Category Header Label */}
             {currentCategoryMeta && (
               <div
